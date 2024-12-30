@@ -77,14 +77,14 @@ class CondMusicgen(nn.Module):
                 break
 
             with mg.autocast:
-                cond_mask = torch.ones([num_samples, 2, max_gen_len + 1]).to(drums.device)
+                # cond_mask = torch.ones([num_samples, 2, max_gen_len + 1]).to(drums.device)
                 drums_clip = drums[:, :, current_gen_offset:current_gen_offset + max_gen_len + 1]
                 piano_roll_clip = piano_roll[:, current_gen_offset:current_gen_offset + max_gen_len + 1]
                 chords_clip = chords[:, current_gen_offset:current_gen_offset + max_gen_len + 1]
 
                 embed_fn = cp_fn(drums=drums_clip,
                                  piano_roll=piano_roll_clip,
-                                 cond_mask=cond_mask,
+                                #  cond_mask=cond_mask,
                                  chords=chords_clip, max_n_frames=max_gen_len,
                                  mode="inference")
                 gen_tokens = lm.generate(num_samples=1,
@@ -214,7 +214,7 @@ class CPTransformerLayer(nn.Module):
 
 
 class CPTransformer(nn.Module):
-    def __init__(self, model, emb_fn, start_layer, latent_dim, autocast, stride=50 * 10):
+    def __init__(self, model, emb_fn, start_layer, latent_dim, autocast, stride=50 * 10): ##changed
         super().__init__()
 
         self.emb_fn = {
@@ -223,20 +223,20 @@ class CPTransformer(nn.Module):
 
         new_layers = nn.ModuleList()
 
-        hidden_dim = 2048
-        cond_dim = 37 + latent_dim + latent_dim
+        hidden_dim = 2048 ## hidden dim from the musicgen decoder
+        cond_dim = latent_dim ##tbc
         num_layers = len(model.layers) - start_layer
-        max_n_frames = 1000
+        max_n_frames = 500 #250
 
         self.masked_embedding = nn.Parameter(
-            torch.randn(num_layers, max_n_frames + 1, cond_dim - 37),
+            torch.randn(num_layers, max_n_frames + 1, cond_dim),
             requires_grad=True)
         self.pos_emb = nn.Parameter(
             torch.randn(num_layers + 1, max_n_frames + 1, hidden_dim),
             requires_grad=True)
         self.encodec_emb = nn.Linear(hidden_dim, latent_dim, bias=False)
         self.merge_linear = nn.ModuleList()
-        self.piano_roll_emb = nn.ModuleList()
+        self.video_emb = nn.ModuleList()
         for i in range(start_layer, len(model.layers)):
             norm1 = model.layers[i].norm1
             norm2 = model.layers[i].norm2
@@ -260,8 +260,8 @@ class CPTransformer(nn.Module):
                                                  layer_scale_2=layer_scale_2,
                                                  autocast=autocast))
 
-            self.merge_linear.append(nn.Linear(cond_dim, hidden_dim, bias=False))
-            self.piano_roll_emb.append(nn.Linear(128, latent_dim, bias=False))
+            self.merge_linear.append(nn.Linear(512, hidden_dim, bias=False))
+            self.video_emb.append(nn.Linear(14, latent_dim, bias=False))
 
         self.layers = new_layers
         self.gates = nn.Parameter(torch.zeros([num_layers]))
@@ -277,43 +277,46 @@ class CPTransformer(nn.Module):
             return None, None
         return activates[i]
 
-    def forward(self, drums, chords, piano_roll, cond_mask, max_n_frames, mode, skip=None):
+    def forward(self, video, max_n_frames, mode, skip=None):
         max_n_frames = self.max_n_frames if max_n_frames is None else max_n_frames
-        drums = self.encodec_emb(sum([self.emb_fn["emb"][i](drums[:, i]) for i in range(4)]))
+        print('video', video.shape)        
 
-        r = drums.shape[-1]
-
-        B, T, _ = chords.shape
+        B, T, _ = video.shape
+        print('B',B)
+        print('T',T)
         o = self.pos_emb[0][None, :T].repeat(B, 1, 1)
-        #print(o.shape, T)
-        cond_mask = torch.cat([torch.ones([B, T, 37]).to(o.device),
-                               cond_mask[:, 0, :, None].repeat(1, 1, 12),
-                               cond_mask[:, 1, :, None].repeat(1, 1, r)], -1)
-        mask_embedding = self.masked_embedding[None, :, :T].repeat(B, 1, 1, 1)
+        print('o', o.shape)
 
         outs = []
         for i in range(len(self.layers)):
-            pr = self.piano_roll_emb[i](piano_roll)
+            # pr = self.video_emb[i](video)
             # cond = torch.cat([chords, chroma, pr, drums], -1)
-            cond = torch.cat([chords, pr, drums], -1)
-            mask_embedding_per_layer = torch.cat([torch.ones([B, T, 37]).to(o.device),
-                                                  mask_embedding[:, i]], -1)
-            cond_t = torch.where(cond_mask > 0, cond, mask_embedding_per_layer)
+            cond_t = video
+            # mask_embedding_per_layer = mask_embedding[:, i]
+            print(cond_t)
+            print('cond t shape',cond_t.shape)
+            print('merge linear', self.merge_linear[i](cond_t).shape)
+            print('shape pos emb', self.pos_emb[i + 1][None, :T].repeat(B, 1, 1).shape)
             embedding = self.merge_linear[i](cond_t) + self.pos_emb[i + 1][None, :T].repeat(B, 1, 1)
+
+            print('embedding',embedding.shape)
             q, k, v, o = self.layers[i](o, embedding)
+            print('lewat!!')
             if not mode == "train":
                 outs.append([[torch.cat([q, q], 0),
                               torch.cat([k, k], 0),
                               torch.cat([v, v], 0)], self.gates[i]])
+                print('masuk not train')
             else:
                 outs.append([[q, k, v], self.gates[i]])
-
+                print('masuk train')
+        print('max_n_frames', max_n_frames)
         emb_fn = EmbFn(activates=outs, fn=self.fn,
                        start_layer=self.start_layer,
                        max_len=max_n_frames,
                        inference=(mode == "inference"),
                        skip=skip)
-
+        print('selesai emb_fn')
         return emb_fn
 
     def save_weights(self, path):
@@ -351,14 +354,13 @@ class CoCoMulla(nn.Module):
     def load_weights(self, path):
         self.cp_transformer.load_weights(path)
 
-    def forward(self, seq, piano_roll, desc, chords, cond_mask, drums,
+    def forward(self, music, video, desc, 
                 num_samples=1, mode="train", max_n_frames=None, prompt_tokens=None):
-        embed_fn = self.cp_transformer(drums=drums,
-                                       piano_roll=piano_roll,
-                                       cond_mask=cond_mask,
-                                       chords=chords, max_n_frames=max_n_frames,
+        
+        embed_fn = self.cp_transformer(video = video,
+                                       max_n_frames=max_n_frames,
                                        mode=mode, skip=None)
-        out = self.peft_model(seq, desc=desc, embed_fn=embed_fn,
+        out = self.peft_model(music, desc=desc, embed_fn=embed_fn,
                               mode=mode, num_samples=num_samples, total_gen_len=max_n_frames,
                               prompt_tokens=prompt_tokens)
         return out

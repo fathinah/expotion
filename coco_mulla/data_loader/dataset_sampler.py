@@ -1,7 +1,22 @@
 import math
 from torch.utils.data import Dataset as BaseDataset
 from ..utilities import *
+import numpy as np
+from scipy.interpolate import CubicSpline
 
+
+
+# Original time points (video sequence length)
+t_original = np.linspace(0, 1, 50)
+# New time points (target sequence length)
+t_new = np.linspace(0, 1, 501)
+
+def interpolate(data):
+    data_new = np.zeros((501, 512))
+    for i in range(512):  # Iterate over features
+        cs = CubicSpline(t_original, data[:, i])
+        data_new[:, i] = cs(t_new)
+    return data_new
 
 def load_data_from_path(path, idx, sec):
     with open(path, "r") as f:
@@ -13,17 +28,14 @@ def load_data_from_path(path, idx, sec):
         f_path = line.split(" ")[0]
         onset = float(line.split(" ")[1])
         offset = float(line.split(" ")[2])
+        video = np.load(os.path.join(f_path, "video_emb.npy"))
         data += [{"path": f_path,
                   "data": {
-                      "piano_roll":
-                          np.load(os.path.join(f_path, "midi.npy"))
+                      "video":interpolate(video)
                   }}]
-        x_len = data[i]["data"]["piano_roll"].shape[0] / 50
-        if offset == -1 or x_len < offset:
-            offset = x_len
         onset = math.ceil(onset)
         offset = int(offset)
-        data_index += [[idx, i, j] for j in range(onset, offset - sec, 10)]
+        data_index += [[idx, i, j] for j in range(onset, offset, 10)]
     return data, data_index
 
 
@@ -39,7 +51,6 @@ class Dataset(BaseDataset):
         for i, path in enumerate(path_lst):
             print(i,path)
             data, data_index = load_data_from_path(path, i, cfg.sample_sec)
-            print(data, data_index)
             self.data.append(data)
             self.data_index += data_index
 
@@ -51,16 +62,12 @@ class Dataset(BaseDataset):
         self.inference = inference
 
         self.descs = [
-            "catchy song",
-            "melodic music piece",
-            "a song",
-            "music tracks",
+            "A realistic and high quality soundtrack and sound effect for the video",
+            "High quality sountrack for a cartoon movie",
+            "A realistic and high quality soundtrack and sound effect for the video",
+            "High quality sountrack for a cartoon movie"
+            
         ]
-        self.sampling_strategy = sampling_strategy
-        if sampling_prob is None:
-            sampling_prob = [0., 0.8]
-        self.sampling_prob = sampling_prob
-        print("samling strategy", self.sampling_strategy, sampling_prob)
 
     def get_prompt(self):
 
@@ -69,61 +76,19 @@ class Dataset(BaseDataset):
 
     def load_data(self, set_id, song_id):
         data = self.data[set_id]
-        if "chords" not in data[song_id]["data"]:
-            piano_roll = data[song_id]["data"]["piano_roll"]
-            chord_path = os.path.join(data[song_id]["path"], "chord.npy")
-            drums_path = os.path.join(data[song_id]["path"], "drums_rvq.npy")
+        if "music" not in data[song_id]["data"]:
+            video = data[song_id]["data"]["video"]
+            music_path = os.path.join(data[song_id]["path"], "music_emb.npy")
 
-            drums = np.load(drums_path)
-
-            chords = np.load(chord_path)
-            mix = np.load(os.path.join(data[song_id]["path"], "mix_rvq.npy"))
-
-            if chords.shape[0] < piano_roll.shape[0]:
-                chords = pad(chords, piano_roll.shape[0], 0, 2)
-
+            music = np.load(music_path)
             result = {
-                "mix": mix,
-                "chords": chords,
-                "piano_roll": piano_roll,
-                "drums": drums,
+                "music": music,
+                "video":video,
             }
             data[song_id]["data"] = result
         return data[song_id]["data"]
 
-    def track_based_sampling(self, seg_len):
-        n = 2
-        cond_mask = np.ones([n, seg_len])
-        r = self.rng.randint(0, 4)
-        if r == 0:
-            cond_mask = cond_mask *0
-        elif r == 1:
-            cond_mask[0] = 0
-        elif r == 2:
-            cond_mask[1] = 0
-        else:
-            assert r == 3
-        return cond_mask
 
-
-    def prob_based_sampling(self, seg_len, sampling_prob):
-        n = 2
-        cond_mask = np.ones([n, seg_len])
-        r = self.rng.rand()
-        if r < sampling_prob[0]:
-            cond_mask = cond_mask * 0.
-        else:
-            r = self.rng.rand(n)
-            for i in range(n):
-                if r[i] < sampling_prob[1]:
-                    cond_mask[i] = 0
-        return cond_mask
-
-    def sample_mask(self, seg_len):
-        if self.sampling_strategy == "track-based":
-            return self.track_based_sampling(seg_len)
-        if self.sampling_strategy == "prob-based":
-            return self.prob_based_sampling(seg_len, self.sampling_prob)
 
     def __len__(self):
         return self.f_len
@@ -131,54 +96,38 @@ class Dataset(BaseDataset):
     def __getitem__(self, idx):
         set_id, sid, sec_id = self.data_index[idx]
         data = self.load_data(set_id, sid)
-        mix = data["mix"]
-        chords = data["chords"]
-        piano_roll = data["piano_roll"]
-        drums = data["drums"]
-
+        music = data["music"]
+        video = data["video"]
+        pad_frame = np.zeros((1, video.shape[1]), dtype=video.dtype)
+        video = np.concatenate([video, pad_frame], axis=0)
         cfg = self.cfg
         st = sec_id
         ed = st + cfg.sample_sec
         frame_st = int(st * cfg.frame_res)
         frame_ed = int(ed * cfg.frame_res)
 
-        mix = mix[:, frame_st: frame_ed]
-        chords = chords[frame_st: frame_ed + 1]
-        piano_roll = piano_roll[frame_st: frame_ed + 1]
-        drums = drums[:, frame_st: frame_ed + 1]
-        pad_chord = np.array(chords.sum(-1) == 0, dtype=np.float16)[:, None]
-        chords = np.concatenate([chords, pad_chord], -1)
-
-        seg_len = frame_ed - frame_st + 1
-        cond_mask = self.sample_mask(seg_len)
+        music = music[:, frame_st: frame_ed]
+        video = video[frame_st: frame_ed+1, : ]
+        print('music', music.shape)
+        print('video', video.shape)
         desc = self.get_prompt()
         return {
-            "mix": mix,
-            "chords": chords,
-            "piano_roll": piano_roll,
-            "drums": drums,
-            "cond_mask": cond_mask,
+            "music":music,
+            "video": video,
+            # "videmb":videmb,
             "desc": desc
         }
-
     def reset_random_seed(self, r, e):
         self.rng = np.random.RandomState(r + self.rid * 100)
         self.epoch = e
         self.rng.shuffle(self.data_index)
 
-
 def collate_fn(batch):
-    mix = torch.stack([torch.from_numpy(d["mix"]) for d in batch], 0)
-    chords = torch.stack([torch.from_numpy(d["chords"]) for d in batch], 0)
-    piano_roll = torch.stack([torch.from_numpy(d["piano_roll"]) for d in batch], 0)
-    drums = torch.stack([torch.from_numpy(d["drums"]) for d in batch], 0)
-    cond_mask = torch.stack([torch.from_numpy(d["cond_mask"]) for d in batch], 0)
+    music = torch.stack([torch.from_numpy(d["music"]) for d in batch], 0)
+    video = torch.stack([torch.from_numpy(d["video"]) for d in batch], 0)
     desc = [d["desc"] for d in batch]
     return {
-        "mix": mix,
-        "chords": chords,
-        "piano_roll": piano_roll,
-        "drums": drums,
-        "cond_mask": cond_mask,
+        "music": music,
+        "video": video,
         "desc": desc,
     }
