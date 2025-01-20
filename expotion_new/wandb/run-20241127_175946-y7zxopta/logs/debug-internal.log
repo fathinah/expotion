@@ -1,0 +1,16 @@
+{"time":"2024-11-27T17:59:46.907768259Z","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-11-27T17:59:46.907800988Z","level":"INFO","msg":"created symlink","path":"/home/coder/laopo/expotion/wandb/run-20241127_175946-y7zxopta/logs/debug-core.log"}
+{"time":"2024-11-27T17:59:47.028906125Z","level":"INFO","msg":"created new stream","id":"y7zxopta"}
+{"time":"2024-11-27T17:59:47.028956784Z","level":"INFO","msg":"stream: started","id":"y7zxopta"}
+{"time":"2024-11-27T17:59:47.029054852Z","level":"INFO","msg":"sender: started","stream_id":"y7zxopta"}
+{"time":"2024-11-27T17:59:47.029039203Z","level":"INFO","msg":"writer: Do: started","stream_id":"y7zxopta"}
+{"time":"2024-11-27T17:59:47.029125871Z","level":"INFO","msg":"handler: started","stream_id":"y7zxopta"}
+{"time":"2024-11-27T17:59:47.645233612Z","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-11-27T18:02:19.943804119Z","level":"INFO","msg":"stream: closing","id":"y7zxopta"}
+{"time":"2024-11-27T18:02:19.943934749Z","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-11-27T18:02:19.944950162Z","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-11-27T18:03:07.529691036Z","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-11-27T18:03:07.871823302Z","level":"INFO","msg":"handler: closed","stream_id":"y7zxopta"}
+{"time":"2024-11-27T18:03:07.871871911Z","level":"INFO","msg":"writer: Close: closed","stream_id":"y7zxopta"}
+{"time":"2024-11-27T18:03:07.871895031Z","level":"INFO","msg":"sender: closed","stream_id":"y7zxopta"}
+{"time":"2024-11-27T18:03:07.872639642Z","level":"INFO","msg":"stream: closed","id":"y7zxopta"}

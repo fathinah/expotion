@@ -1,0 +1,17 @@
+{"time":"2024-11-27T18:22:56.288305014Z","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-11-27T18:22:56.288333774Z","level":"INFO","msg":"created symlink","path":"/home/coder/laopo/expotion/wandb/run-20241127_182256-bhuhevjo/logs/debug-core.log"}
+{"time":"2024-11-27T18:22:56.41031593Z","level":"INFO","msg":"created new stream","id":"bhuhevjo"}
+{"time":"2024-11-27T18:22:56.41037347Z","level":"INFO","msg":"stream: started","id":"bhuhevjo"}
+{"time":"2024-11-27T18:22:56.410428689Z","level":"INFO","msg":"writer: Do: started","stream_id":"bhuhevjo"}
+{"time":"2024-11-27T18:22:56.410477338Z","level":"INFO","msg":"sender: started","stream_id":"bhuhevjo"}
+{"time":"2024-11-27T18:22:56.410558127Z","level":"INFO","msg":"handler: started","stream_id":"bhuhevjo"}
+{"time":"2024-11-27T18:22:57.081811432Z","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-11-27T18:27:43.163136746Z","level":"INFO","msg":"api: retrying HTTP error","status":502,"url":"https://api.wandb.ai/files/xinyue-li-mohamed-bin-zayed-university-of-artificial-int/expotion/bhuhevjo/file_stream"}
+{"time":"2024-11-27T18:27:58.613605643Z","level":"INFO","msg":"stream: closing","id":"bhuhevjo"}
+{"time":"2024-11-27T18:27:58.613710412Z","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-11-27T18:27:58.617658787Z","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-11-27T18:28:50.804182972Z","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-11-27T18:28:51.21960862Z","level":"INFO","msg":"handler: closed","stream_id":"bhuhevjo"}
+{"time":"2024-11-27T18:28:51.219690549Z","level":"INFO","msg":"writer: Close: closed","stream_id":"bhuhevjo"}
+{"time":"2024-11-27T18:28:51.219697889Z","level":"INFO","msg":"sender: closed","stream_id":"bhuhevjo"}
+{"time":"2024-11-27T18:28:51.220504188Z","level":"INFO","msg":"stream: closed","id":"bhuhevjo"}

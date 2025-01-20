@@ -1,0 +1,8 @@
+{"time":"2025-01-07T11:11:52.918808034Z","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2025-01-07T11:11:52.918826814Z","level":"INFO","msg":"created symlink","path":"/home/coder/laopo/expotion/wandb/run-20250107_111152-zkmuxjc7/logs/debug-core.log"}
+{"time":"2025-01-07T11:11:53.133263232Z","level":"INFO","msg":"created new stream","id":"zkmuxjc7"}
+{"time":"2025-01-07T11:11:53.133336541Z","level":"INFO","msg":"stream: started","id":"zkmuxjc7"}
+{"time":"2025-01-07T11:11:53.13340812Z","level":"INFO","msg":"writer: Do: started","stream_id":"zkmuxjc7"}
+{"time":"2025-01-07T11:11:53.133530797Z","level":"INFO","msg":"sender: started","stream_id":"zkmuxjc7"}
+{"time":"2025-01-07T11:11:53.133585687Z","level":"INFO","msg":"handler: started","stream_id":"zkmuxjc7"}
+{"time":"2025-01-07T11:11:53.489114666Z","level":"INFO","msg":"Starting system monitor"}

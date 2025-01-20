@@ -1,0 +1,1512 @@
+Epoch 0:   0%|                                                                                                | 0/485 [00:00<?, ?it/s]/home/coder/miniconda3/envs/facialmusic/lib/python3.10/site-packages/torch/optim/lr_scheduler.py:136: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+  warnings.warn("Detected call of `lr_scheduler.step()` before `optimizer.step()`. "
+Epoch 0:   1%|▌                                                                                       | 3/485 [00:02<06:26,  1.25it/s]
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+ idvid issssss: /home/coder/laopo/data/dataset_tomnjerry/filtered/tnj_0/video/CopyofCopyof036-OldRockin'ChairTom_clip_029_280-290.mp4
+
+err in reading file /home/coder/laopo/data/dataset_tomnjerry/filtered/tnj_0/rvq/CopyofCopyof036-OldRockin'ChairTom_clip_029_280-290.npy,/home/coder/laopo/data/dataset_tomnjerry/filtered/tnj_0/face/CopyofCopyof036-OldRockin'ChairTom_clip_029_280-290.pth
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+ idvid issssss: /home/coder/laopo/data/dataset_tomnjerry/filtered/tnj_0/video/CopyofCopyof27-CatFishin'_clip_026_250-260.mp4
+
+err in reading file /home/coder/laopo/data/dataset_tomnjerry/filtered/tnj_0/rvq/CopyofCopyof27-CatFishin'_clip_026_250-260.npy,/home/coder/laopo/data/dataset_tomnjerry/filtered/tnj_0/face/CopyofCopyof27-CatFishin'_clip_026_250-260.pth
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+ idvid issssss: /home/coder/laopo/data/dataset_tomnjerry/filtered/tnj_0/video/CopyofCopyof036-OldRockin'ChairTom_clip_001_0-10.mp4
+
+err in reading file /home/coder/laopo/data/dataset_tomnjerry/filtered/tnj_0/rvq/CopyofCopyof036-OldRockin'ChairTom_clip_001_0-10.npy,/home/coder/laopo/data/dataset_tomnjerry/filtered/tnj_0/face/CopyofCopyof036-OldRockin'ChairTom_clip_001_0-10.pth
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+ idvid issssss: /home/coder/laopo/data/dataset_tomnjerry/filtered/tnj_0/video/CopyofCopyof27-CatFishin'_clip_012_110-120.mp4
+
+err in reading file /home/coder/laopo/data/dataset_tomnjerry/filtered/tnj_0/rvq/CopyofCopyof27-CatFishin'_clip_012_110-120.npy,/home/coder/laopo/data/dataset_tomnjerry/filtered/tnj_0/face/CopyofCopyof27-CatFishin'_clip_012_110-120.pth
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+ idvid issssss: /home/coder/laopo/data/dataset_tomnjerry/filtered/tnj_0/video/CopyofCopyof27-CatFishin'_clip_040_390-400.mp4
+
+err in reading file /home/coder/laopo/data/dataset_tomnjerry/filtered/tnj_0/rvq/CopyofCopyof27-CatFishin'_clip_040_390-400.npy,/home/coder/laopo/data/dataset_tomnjerry/filtered/tnj_0/face/CopyofCopyof27-CatFishin'_clip_040_390-400.pth
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+ idvid issssss: /home/coder/laopo/data/dataset_tomnjerry/filtered/tnj_0/video/CopyofCopyof036-OldRockin'ChairTom_clip_025_240-250.mp4
+
+err in reading file /home/coder/laopo/data/dataset_tomnjerry/filtered/tnj_0/rvq/CopyofCopyof036-OldRockin'ChairTom_clip_025_240-250.npy,/home/coder/laopo/data/dataset_tomnjerry/filtered/tnj_0/face/CopyofCopyof036-OldRockin'ChairTom_clip_025_240-250.pth
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+ idvid issssss: /home/coder/laopo/data/dataset_tomnjerry/filtered/tnj_0/video/CopyofCopyof036-OldRockin'ChairTom_clip_024_230-240.mp4
+
+err in reading file /home/coder/laopo/data/dataset_tomnjerry/filtered/tnj_0/rvq/CopyofCopyof036-OldRockin'ChairTom_clip_024_230-240.npy,/home/coder/laopo/data/dataset_tomnjerry/filtered/tnj_0/face/CopyofCopyof036-OldRockin'ChairTom_clip_024_230-240.pth
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])
+pass!
+pass!
+pass!
+pass!
+ idvid issssss: /home/coder/laopo/data/dataset_tomnjerry/filtered/tnj_0/video/CopyofCopyof27-CatFishin'_clip_024_230-240.mp4
+
+err in reading file /home/coder/laopo/data/dataset_tomnjerry/filtered/tnj_0/rvq/CopyofCopyof27-CatFishin'_clip_024_230-240.npy,/home/coder/laopo/data/dataset_tomnjerry/filtered/tnj_0/face/CopyofCopyof27-CatFishin'_clip_024_230-240.pth
+pass!
+pass!
+pass!
+pass!
+pass!
+pass!
+torch.Size([10, 251, 768]) torch.Size([10, 251, 1]) torch.Size([10, 251, 1]) torch.Size([10, 2, 251])

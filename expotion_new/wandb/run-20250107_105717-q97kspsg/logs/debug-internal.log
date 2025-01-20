@@ -1,0 +1,11 @@
+{"time":"2025-01-07T10:57:17.647659209Z","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2025-01-07T10:57:17.647679739Z","level":"INFO","msg":"created symlink","path":"/home/coder/laopo/expotion/wandb/run-20250107_105717-q97kspsg/logs/debug-core.log"}
+{"time":"2025-01-07T10:57:17.76509889Z","level":"INFO","msg":"created new stream","id":"q97kspsg"}
+{"time":"2025-01-07T10:57:17.765158609Z","level":"INFO","msg":"stream: started","id":"q97kspsg"}
+{"time":"2025-01-07T10:57:17.765183579Z","level":"INFO","msg":"writer: Do: started","stream_id":"q97kspsg"}
+{"time":"2025-01-07T10:57:17.765190079Z","level":"INFO","msg":"sender: started","stream_id":"q97kspsg"}
+{"time":"2025-01-07T10:57:17.765219568Z","level":"INFO","msg":"handler: started","stream_id":"q97kspsg"}
+{"time":"2025-01-07T10:57:18.150840692Z","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-01-07T10:57:26.274748214Z","level":"INFO","msg":"stream: closing","id":"q97kspsg"}
+{"time":"2025-01-07T10:57:26.275050378Z","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-01-07T10:57:26.275760345Z","level":"INFO","msg":"Stopped system monitor"}

@@ -1,0 +1,8 @@
+{"time":"2024-12-02T19:54:26.87545594Z","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-12-02T19:54:26.87549166Z","level":"INFO","msg":"created symlink","path":"/home/coder/laopo/expotion/wandb/run-20241202_195426-epvk0v0r/logs/debug-core.log"}
+{"time":"2024-12-02T19:54:26.996545388Z","level":"INFO","msg":"created new stream","id":"epvk0v0r"}
+{"time":"2024-12-02T19:54:26.996620016Z","level":"INFO","msg":"stream: started","id":"epvk0v0r"}
+{"time":"2024-12-02T19:54:26.996656495Z","level":"INFO","msg":"writer: Do: started","stream_id":"epvk0v0r"}
+{"time":"2024-12-02T19:54:26.996715014Z","level":"INFO","msg":"sender: started","stream_id":"epvk0v0r"}
+{"time":"2024-12-02T19:54:26.996790122Z","level":"INFO","msg":"handler: started","stream_id":"epvk0v0r"}
+{"time":"2024-12-02T19:54:27.615694342Z","level":"INFO","msg":"Starting system monitor"}

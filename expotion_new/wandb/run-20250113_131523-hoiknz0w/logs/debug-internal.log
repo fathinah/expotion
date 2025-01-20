@@ -1,0 +1,16 @@
+{"time":"2025-01-13T13:15:23.702628459Z","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2025-01-13T13:15:23.702660359Z","level":"INFO","msg":"created symlink","path":"/home/coder/laopo/expotion/wandb/run-20250113_131523-hoiknz0w/logs/debug-core.log"}
+{"time":"2025-01-13T13:15:23.82546319Z","level":"INFO","msg":"created new stream","id":"hoiknz0w"}
+{"time":"2025-01-13T13:15:23.82553274Z","level":"INFO","msg":"stream: started","id":"hoiknz0w"}
+{"time":"2025-01-13T13:15:23.825571659Z","level":"INFO","msg":"writer: Do: started","stream_id":"hoiknz0w"}
+{"time":"2025-01-13T13:15:23.825640758Z","level":"INFO","msg":"sender: started","stream_id":"hoiknz0w"}
+{"time":"2025-01-13T13:15:23.825640788Z","level":"INFO","msg":"handler: started","stream_id":"hoiknz0w"}
+{"time":"2025-01-13T13:15:24.325936829Z","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-01-13T13:44:39.152561666Z","level":"INFO","msg":"stream: closing","id":"hoiknz0w"}
+{"time":"2025-01-13T13:44:39.152665573Z","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-01-13T13:44:39.153849933Z","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-01-13T13:45:00.920611033Z","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-01-13T13:45:01.211540801Z","level":"INFO","msg":"handler: closed","stream_id":"hoiknz0w"}
+{"time":"2025-01-13T13:45:01.211649418Z","level":"INFO","msg":"sender: closed","stream_id":"hoiknz0w"}
+{"time":"2025-01-13T13:45:01.211642868Z","level":"INFO","msg":"writer: Close: closed","stream_id":"hoiknz0w"}
+{"time":"2025-01-13T13:45:01.212334422Z","level":"INFO","msg":"stream: closed","id":"hoiknz0w"}
