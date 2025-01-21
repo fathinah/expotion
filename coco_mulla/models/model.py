@@ -214,7 +214,7 @@ class CPTransformerLayer(nn.Module):
 
 
 class CPTransformer(nn.Module):
-    def __init__(self, model, emb_fn, start_layer, latent_dim, autocast, stride=50 * 10): ##changed
+    def __init__(self, model, emb_fn, start_layer, latent_dim, autocast, is_video = False, is_motion = False, is_face = False, stride=50 * 10): ##changed
         super().__init__()
 
         self.emb_fn = {
@@ -224,19 +224,28 @@ class CPTransformer(nn.Module):
         new_layers = nn.ModuleList()
 
         hidden_dim = 2048 ## hidden dim from the musicgen decoder
-        cond_dim = latent_dim ##tbc
-        num_layers = len(model.layers) - start_layer
-        max_n_frames = 500 #250
+        cond_dim = 0 
+        if is_video:
+            cond_dim += latent_dim   # video
+        if is_face:
+            cond_dim += latent_dim   # face
+        if is_motion:
+            cond_dim += 34           # motion
 
-        self.masked_embedding = nn.Parameter(
-            torch.randn(num_layers, max_n_frames + 1, cond_dim),
-            requires_grad=True)
+       
+
+        num_layers = len(model.layers) - start_layer
+        max_n_frames = 500 
+
+        self.merge_linear = nn.ModuleList()
+        self.video = nn.ModuleList()
+        self.face = nn.ModuleList()
+
         self.pos_emb = nn.Parameter(
             torch.randn(num_layers + 1, max_n_frames + 1, hidden_dim),
             requires_grad=True)
-        self.encodec_emb = nn.Linear(hidden_dim, latent_dim, bias=False)
-        self.merge_linear = nn.ModuleList()
-        self.video_emb = nn.ModuleList()
+        
+      
         for i in range(start_layer, len(model.layers)):
             norm1 = model.layers[i].norm1
             norm2 = model.layers[i].norm2
@@ -260,8 +269,11 @@ class CPTransformer(nn.Module):
                                                  layer_scale_2=layer_scale_2,
                                                  autocast=autocast))
 
-            self.merge_linear.append(nn.Linear(512, hidden_dim, bias=False))
-            self.video_emb.append(nn.Linear(14, latent_dim, bias=False))
+            self.merge_linear.append(nn.Linear(cond_dim, hidden_dim, bias=False))
+            self.video.append(nn.Linear(1408, latent_dim, bias=False))
+            self.face.append(nn.Linear(768, latent_dim, bias=False))
+            
+
 
         self.layers = new_layers
         self.gates = nn.Parameter(torch.zeros([num_layers]))
@@ -277,46 +289,59 @@ class CPTransformer(nn.Module):
             return None, None
         return activates[i]
 
-    def forward(self, video, max_n_frames, mode, skip=None):
-        max_n_frames = self.max_n_frames if max_n_frames is None else max_n_frames
-        print('video', video.shape)        
-
-        B, T, _ = video.shape
-        print('B',B)
-        print('T',T)
+    def forward(self, max_n_frames, mode, video=None, motion=None, face=None, skip=None):
+        max_n_frames = self.max_n_frames if max_n_frames is None else max_n_frames 
+        if video is not None:
+            B, T, _ = video.shape
+            device = video.device
+        elif face is not None:
+            B, T, _ = face.shape
+            device = face.device
+        elif motion is not None:
+            B, T, _ = motion.shape
+            device = motion.device
+        else:
+            raise ValueError("At least one of `video`, `face`, or `motion` must be provided.")
+    
         o = self.pos_emb[0][None, :T].repeat(B, 1, 1)
-        print('o', o.shape)
-
         outs = []
-        for i in range(len(self.layers)):
-            # pr = self.video_emb[i](video)
-            # cond = torch.cat([chords, chroma, pr, drums], -1)
-            cond_t = video
-            # mask_embedding_per_layer = mask_embedding[:, i]
-            print(cond_t)
-            print('cond t shape',cond_t.shape)
-            print('merge linear', self.merge_linear[i](cond_t).shape)
-            print('shape pos emb', self.pos_emb[i + 1][None, :T].repeat(B, 1, 1).shape)
-            embedding = self.merge_linear[i](cond_t) + self.pos_emb[i + 1][None, :T].repeat(B, 1, 1)
 
-            print('embedding',embedding.shape)
+        for i in range(len(self.layers)):
+            cond_list = []
+        
+            if video is not None:
+                video_proj = self.video[i](video)
+                cond_list.append(video_proj)
+                
+            if motion is not None:
+                # If you need a linear for 'motion' as well, place it here,
+                # otherwise just append the raw motion
+                cond_list.append(motion)
+                
+            if face is not None:
+                face_proj = self.face[i](face)
+                cond_list.append(face_proj)
+
+            # Concatenate all provided inputs along last dim
+            cond = torch.cat(cond_list, dim=-1)
+
+
+            embedding = self.merge_linear[i](cond) + self.pos_emb[i + 1][None, :T].repeat(B, 1, 1)
+
             q, k, v, o = self.layers[i](o, embedding)
-            print('lewat!!')
+            
             if not mode == "train":
                 outs.append([[torch.cat([q, q], 0),
                               torch.cat([k, k], 0),
                               torch.cat([v, v], 0)], self.gates[i]])
-                print('masuk not train')
             else:
                 outs.append([[q, k, v], self.gates[i]])
-                print('masuk train')
-        print('max_n_frames', max_n_frames)
+
         emb_fn = EmbFn(activates=outs, fn=self.fn,
                        start_layer=self.start_layer,
                        max_len=max_n_frames,
                        inference=(mode == "inference"),
                        skip=skip)
-        print('selesai emb_fn')
         return emb_fn
 
     def save_weights(self, path):
@@ -333,7 +358,7 @@ class CPTransformer(nn.Module):
 
 
 class CoCoMulla(nn.Module):
-    def __init__(self, sec, num_layers, latent_dim):
+    def __init__(self, sec, num_layers, latent_dim,  is_video, is_motion, is_face):
         super().__init__()
         lm = CondMusicgen(sec)
         self.peft_model = lm
@@ -342,7 +367,10 @@ class CoCoMulla(nn.Module):
                                             emb_fn=self.musicgen.lm.emb,
                                             start_layer=48 - num_layers,
                                             latent_dim=latent_dim,
-                                            autocast=self.musicgen.autocast)
+                                            autocast=self.musicgen.autocast,
+                                            is_video = is_video,
+                                            is_motion = is_motion,
+                                            is_face = is_face)
 
     def set_training(self):
         self.peft_model.set_training()
@@ -354,10 +382,12 @@ class CoCoMulla(nn.Module):
     def load_weights(self, path):
         self.cp_transformer.load_weights(path)
 
-    def forward(self, music, video, desc, 
+    def forward(self, music, video, motion, face, desc, 
                 num_samples=1, mode="train", max_n_frames=None, prompt_tokens=None):
         
-        embed_fn = self.cp_transformer(video = video,
+        embed_fn = self.cp_transformer(video = video, 
+                                        motion = motion, 
+                                        face = face,
                                        max_n_frames=max_n_frames,
                                        mode=mode, skip=None)
         out = self.peft_model(music, desc=desc, embed_fn=embed_fn,

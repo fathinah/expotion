@@ -1,86 +1,83 @@
 import argparse
 import librosa
 
-from coco_mulla.models import CoCoMulla
+from coco_mulla.models import CoCoMulla ## Change this one!!
 from coco_mulla.utilities import *
-from coco_mulla.utilities.encodec_utils import extract_rvq, save_rvq
-from coco_mulla.utilities.symbolic_utils import process_midi, process_chord
+from coco_mulla.utilities.encodec_utils import save_rvq
 
 from coco_mulla.utilities.sep_utils import separate
-from config import TrainCfg
+from config import TrainCfg  ## change this one!!
 import torch.nn.functional as F
+import numpy as np 
+import torch
+from scipy.interpolate import CubicSpline
 
 device = get_device()
 
+def interpolate(data, pad = False):
+    dim = data.shape[1]
+    data_new = np.zeros((500, dim))
+    seq_len = data.shape[0]
+    # Original time points (video sequence length)
+    t_original = np.linspace(0, 1, seq_len)
+    # New time points (target sequence length)
+    t_new = np.linspace(0, 1, 500)
+    for i in range(dim):  # Iterate over features
+        cs = CubicSpline(t_original, data[:, i])
+        data_new[:, i] = cs(t_new)
+    if pad:
+        pad_frame = np.zeros((1, data_new.shape[1]), dtype=data_new.dtype)
+        data_new = np.concatenate([data_new, pad_frame], axis=0)
 
-def generate(model_path, batch):
-    model = CoCoMulla(TrainCfg.sample_sec,
-                      num_layers=args.num_layers,
-                      latent_dim=args.latent_dim).to(device)
+    return data_new
+
+
+def generate(model_path, batch, is_video, is_motion, is_face):
+    model = CoCoMulla(
+        sec=TrainCfg.sample_sec,
+        num_layers=args.num_layers,
+        latent_dim=args.latent_dim,
+        is_video=is_video,
+        is_motion=is_motion,
+        is_face=is_face
+    ).to(device)
     model.load_weights(model_path)
     model.eval()
+    print(batch)
     with torch.no_grad():
         gen_tokens = model(**batch)
 
     return gen_tokens
 
 
-def generate_mask(xlen):
-    names = ["chord-only", "chord-drums", "chord-midi", "chord-drums-midi"]
-    mask = torch.zeros([4, 2, xlen]).to(device)
-    mask[1, 1] = 1
-    mask[2, 0] = 1
-    mask[3] += 1
-    return mask, names
 
+def load_data(video_path=None, face_path=None, motion_path=None, offset=0):
+    video_emb, face_emb, motion_emb = None, None, None
 
-def load_data(audio_path, chord_path, midi_path, offset):
-    sr = TrainCfg.sample_rate
-    res = TrainCfg.frame_res
-    sample_sec = TrainCfg.sample_sec
+    # Load video if path is provided
+    if video_path is not None:
+        video_tmp = torch.load(video_path).to(torch.float32).detach().cpu().numpy()
+        video_tmp = interpolate(video_tmp, pad=True)
+        video_emb = torch.from_numpy(video_tmp).to(device).float()
 
-    wav, _ = librosa.load(audio_path, sr=sr, mono=True)
-    wav = np2torch(wav).to(device)[None, None, ...]
-    wavs = separate(wav, sr)
-    drums_rvq = extract_rvq(wavs["drums"], sr=sr)
-    chord, _ = process_chord(chord_path)
-    flatten_midi_path = midi_path + ".piano.mid"
-    midi, _ = process_midi(midi_path)
+    # Load face if path is provided
+    if face_path is not None:
+        face_tmp = np.load(face_path)
+        face_tmp = interpolate(face_tmp, pad=True)
+        face_emb = torch.from_numpy(face_tmp).to(device).float()
 
+    # Load motion if path is provided
+    if motion_path is not None:
+        motion_tmp = np.load(motion_path)
+        motion_tmp = motion_tmp[:, 0, :]
+        motion_tmp = interpolate(motion_tmp, pad=True)
+        motion_emb = torch.from_numpy(motion_tmp).to(device).float()
 
-
-    chord = crop(chord[None, ...], "chord", sample_sec, res)
-    pad_chord = chord.sum(-1, keepdims=True) == 0
-    chord = np.concatenate([chord, pad_chord], -1)
-
-    midi = crop(midi[None, ...], "midi", sample_sec, res,offset=offset)
-    drums_rvq = crop(drums_rvq[None, ...], "drums_rvq", sample_sec, res, offset=offset)
-
-    chord = torch.from_numpy(chord).to(device).float()
-    midi = torch.from_numpy(midi).to(device).float()
-    drums_rvq = drums_rvq.to(device).long()
-
-    return drums_rvq, midi, chord
-
-
-def crop(x, mode, sample_sec, res, offset=0):
-    xlen = x.shape[1] if mode == "chord" or mode == "midi" else x.shape[-1]
-    sample_len = int(sample_sec * res) + 1
-    if xlen < sample_len:
-        if mode == "chord" or mode == "midi":
-            x = np.pad(x, ((0, 0), (0, sample_len - xlen), (0, 0)))
-        else:
-            x = F.pad(x, (0, sample_len - xlen), "constant", 0)
-        return x
-
-    st = offset * res
-    ed = int((offset + sample_sec) * res) + 1
-    if mode == "chord" or mode == "midi":
-        assert x.shape[1] > st
-        return x[:, st: ed]
-    assert x.shape[2] > ed
-    return x[:, :, st: ed]
-
+    print("Loaded shapes:",
+          f"video={video_emb.shape if video_emb is not None else None},",
+          f"face={face_emb.shape if face_emb is not None else None},",
+          f"motion={motion_emb.shape if motion_emb is not None else None}")
+    return video_emb, face_emb, motion_emb
 
 def save_pred(output_folder, tags, pred):
     mkdir(output_folder)
@@ -88,51 +85,63 @@ def save_pred(output_folder, tags, pred):
     save_rvq(output_list=output_list, tokens=pred)
 
 
-def wrap_batch(drums_rvq, midi, chord, cond_mask, prompt):
-    num_samples = len(cond_mask)
-    midi = midi.repeat(num_samples, 1, 1)
-    chord = chord.repeat(num_samples, 1, 1)
-    drums_rvq = drums_rvq.repeat(num_samples, 1, 1)
-    prompt = [prompt] * num_samples
+def wrap_batch(video=None, face=None, motion=None, prompt=""):
+    num_samples = 1
     batch = {
-        "seq": None,
-        "desc": prompt,
-        "chords": chord,
+        "music": None,
+        "desc": [prompt] * num_samples,
         "num_samples": num_samples,
-        "cond_mask": cond_mask,
-        "drums": drums_rvq,
-        "piano_roll": midi,
         "mode": "inference",
+        "video":None,
+        "face":None,
+        "motion":None
     }
+
+    # Repeat & attach only if not None
+    if video is not None:
+        batch["video"] = video.repeat(num_samples, 1, 1)
+    if face is not None:
+        batch["face"] = face.repeat(num_samples, 1, 1)
+    if motion is not None:
+        batch["motion"] = motion.repeat(num_samples, 1, 1)
+
     return batch
 
 
 def inference(args):
-    drums_rvq, midi, chord = load_data(audio_path=args.audio_path,
-                                       chord_path=args.chord_path,
-                                       midi_path=args.midi_path,
+    video,face, motion = load_data(video_path=args.video_path,
+                                   face_path=args.face_path,
+                                   motion_path=args.motion_path,
                                        offset=args.offset)
-    cond_mask, names = generate_mask(drums_rvq.shape[-1])
-    batch = wrap_batch(drums_rvq, midi, chord, cond_mask, read_lst(args.prompt_path)[0])
+    # Decide which flags are True/False
+    is_video = (video is not None)
+    is_motion = (motion is not None)
+    is_face = (face is not None)
+    print('is video, is_motion, is_face', is_video, is_motion, is_face)
+
+    batch = wrap_batch(video, face, motion, read_lst(args.prompt_path)[0])
     pred = generate(model_path=args.model_path,
-                    batch=batch)
+                    batch=batch,
+                    is_video=is_video,
+                    is_motion=is_motion,
+                    is_face=is_face)
     save_pred(output_folder=args.output_folder,
-              tags=names,
+              tags=['generated'],
               pred=pred)
 
-
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument('-o', '--output_folder', type=str)
-    parser.add_argument('-n', '--num_layers', type=int)
-    parser.add_argument('-l', '--latent_dim', type=int)
-    parser.add_argument('-a', '--audio_path', type=str, default=None)
-    parser.add_argument('-c', '--chord_path', type=str, default=None)
-    parser.add_argument('-m', '--midi_path', type=str, default=None)
-    parser.add_argument('-d', '--drums_path', type=str, default=None)
-    parser.add_argument('-e', '--model_path', type=str)
-    parser.add_argument('-p', '--prompt_path', type=str)
-    parser.add_argument('-f', '--offset', type=int)
+    import argparse
+    
+    parser = argparse.ArgumentParser(description="Inference script for CoCoMulla.")
+    parser.add_argument("--num_layers", type=int, default=48, help="Number of transformer layers.")
+    parser.add_argument("--latent_dim", type=int, default=48, help="Latent dimension size.")
+    parser.add_argument("--output_folder", type=str, help="Where to store the generated outputs.")
+    parser.add_argument("--model_path", type=str,help="Path to the model checkpoint.")
+    parser.add_argument("--prompt_path", type=str,help="Path to a text file containing your generation prompt.")
+    parser.add_argument("--video_path", type=str, help="Path to video embedding, if available.")
+    parser.add_argument("--motion_path", type=str, help="Path to motion embedding, if available.")
+    parser.add_argument("--face_path", type=str, help="Path to face embedding, if available.")
+    parser.add_argument("--offset", type=int, default=0,help="Offset in frames or seconds (if needed).")
 
     args = parser.parse_args()
     inference(args)
