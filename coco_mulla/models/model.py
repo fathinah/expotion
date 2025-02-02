@@ -6,7 +6,7 @@ from ..utilities.model_utils import freeze, print_trainable_parameters
 
 def get_musicgen(sec, device):
     mg = MusicGen.get_pretrained(name='large', device=device)
-    mg.set_generation_params(duration=sec, extend_stride=16, top_k=250)
+    mg.set_generation_params(duration=sec, extend_stride=0, top_k=250)
     mg.lm.here()
     freeze(mg.lm)
     return mg
@@ -53,60 +53,6 @@ class CondMusicgen(nn.Module):
                                          prompt=prompt_tokens, conditions=attributes,
                                          callback=None, max_gen_len=total_gen_len, **mg.generation_params)
                 return gen_tokens
-
-    def generate(self, cp_fn, piano_roll, desc, chords,
-                 drums, num_samples):
-
-        mg = self.musicgen
-        lm = self.lm
-
-        attributes, _ = mg._prepare_tokens_and_attributes(desc, None)
-
-        all_tokens = []
-        stride_tokens = int(self.frame_rate * mg.extend_stride)
-        current_gen_offset = 0
-        prompt_length = 0
-        prompt_tokens = None
-        total_gen_len = drums.shape[-1] - 1
-        total_sec = total_gen_len / 50.
-        while current_gen_offset + prompt_length < total_gen_len:
-            time_offset = current_gen_offset / self.frame_rate
-            chunk_duration = min(total_sec - time_offset, self.max_duration)
-            max_gen_len = int(chunk_duration * self.frame_rate)
-            if prompt_length >= max_gen_len:
-                break
-
-            with mg.autocast:
-                # cond_mask = torch.ones([num_samples, 2, max_gen_len + 1]).to(drums.device)
-                drums_clip = drums[:, :, current_gen_offset:current_gen_offset + max_gen_len + 1]
-                piano_roll_clip = piano_roll[:, current_gen_offset:current_gen_offset + max_gen_len + 1]
-                chords_clip = chords[:, current_gen_offset:current_gen_offset + max_gen_len + 1]
-
-                embed_fn = cp_fn(drums=drums_clip,
-                                 piano_roll=piano_roll_clip,
-                                #  cond_mask=cond_mask,
-                                 chords=chords_clip, max_n_frames=max_gen_len,
-                                 mode="inference")
-                gen_tokens = lm.generate(num_samples=1,
-                                         embed_fn=embed_fn, prompt=prompt_tokens,
-                                         conditions=attributes,
-                                         callback=None, max_gen_len=max_gen_len, **mg.generation_params)
-            if prompt_tokens is None:
-                all_tokens.append(gen_tokens)
-            else:
-                all_tokens.append(gen_tokens[:, :, prompt_tokens.shape[-1]:])
-            prompt_tokens = gen_tokens[:, :, stride_tokens:]
-            prompt_length = prompt_tokens.shape[-1]
-            current_gen_offset += stride_tokens
-            if current_gen_offset > 50 * 80:
-                break
-
-        gen_tokens = torch.cat(all_tokens, dim=-1)
-        return gen_tokens
-
-    def get_input_embeddings(self):
-        return self.lm.emb
-
 
 class EmbFn:
     def __init__(self, activates, fn, start_layer, max_len, inference=False, skip=None):
@@ -214,7 +160,7 @@ class CPTransformerLayer(nn.Module):
 
 
 class CPTransformer(nn.Module):
-    def __init__(self, model, emb_fn, start_layer, latent_dim, autocast, is_video = False, is_motion = False, is_face = False, stride=50 * 10): ##changed
+    def __init__(self, model, emb_fn, start_layer, latent_dim, autocast, is_video, is_motion, is_face, stride=50 * 10): ##changed
         super().__init__()
 
         self.emb_fn = {
@@ -223,19 +169,18 @@ class CPTransformer(nn.Module):
 
         new_layers = nn.ModuleList()
 
-        hidden_dim = 2048 ## hidden dim from the musicgen decoder
-        cond_dim = 0 
+        hidden_dim = 2048
+        cond_dim = 0
         if is_video:
-            cond_dim += latent_dim   # video
+            cond_dim += latent_dim  
         if is_face:
-            cond_dim += latent_dim   # face
+            cond_dim += latent_dim   
         if is_motion:
-            cond_dim += 34           # motion
+            cond_dim += latent_dim          
 
-       
 
         num_layers = len(model.layers) - start_layer
-        max_n_frames = 500 
+        max_n_frames = 500
 
         self.merge_linear = nn.ModuleList()
         self.video = nn.ModuleList()
@@ -270,11 +215,9 @@ class CPTransformer(nn.Module):
                                                  autocast=autocast))
 
             self.merge_linear.append(nn.Linear(cond_dim, hidden_dim, bias=False))
-            self.video.append(nn.Linear(1408, latent_dim, bias=False))
-            self.face.append(nn.Linear(768, latent_dim, bias=False))
+            self.video.append(nn.Linear(131072, latent_dim, bias=False))
+            ## to be added if there is fixed controls
             
-
-
         self.layers = new_layers
         self.gates = nn.Parameter(torch.zeros([num_layers]))
         freeze(self.layers)
@@ -291,43 +234,18 @@ class CPTransformer(nn.Module):
 
     def forward(self, max_n_frames, mode, video=None, motion=None, face=None, skip=None):
         max_n_frames = self.max_n_frames if max_n_frames is None else max_n_frames 
-        if video is not None:
-            B, T, _ = video.shape
-            device = video.device
-        elif face is not None:
-            B, T, _ = face.shape
-            device = face.device
-        elif motion is not None:
-            B, T, _ = motion.shape
-            device = motion.device
-        else:
-            raise ValueError("At least one of `video`, `face`, or `motion` must be provided.")
-    
+        B, T, _ = video.shape
+        device = video.device
         o = self.pos_emb[0][None, :T].repeat(B, 1, 1)
         outs = []
 
         for i in range(len(self.layers)):
             cond_list = []
-        
-            if video is not None:
-                video_proj = self.video[i](video)
-                cond_list.append(video_proj)
-                
-            if motion is not None:
-                # If you need a linear for 'motion' as well, place it here,
-                # otherwise just append the raw motion
-                cond_list.append(motion)
-                
-            if face is not None:
-                face_proj = self.face[i](face)
-                cond_list.append(face_proj)
-
-            # Concatenate all provided inputs along last dim
+            video_emb = self.video[i](video)
+            cond_list.append(video_emb)
             cond = torch.cat(cond_list, dim=-1)
-
-
+            ## to be added if there is more controls
             embedding = self.merge_linear[i](cond) + self.pos_emb[i + 1][None, :T].repeat(B, 1, 1)
-
             q, k, v, o = self.layers[i](o, embedding)
             
             if not mode == "train":
@@ -358,7 +276,8 @@ class CPTransformer(nn.Module):
 
 
 class CoCoMulla(nn.Module):
-    def __init__(self, sec, num_layers, latent_dim,  is_video, is_motion, is_face):
+    def __init__(self, sec, num_layers, latent_dim,  is_video = False, is_motion = False, is_face = False):
+        
         super().__init__()
         lm = CondMusicgen(sec)
         self.peft_model = lm
@@ -384,19 +303,15 @@ class CoCoMulla(nn.Module):
 
     def forward(self, music, video, motion, face, desc, 
                 num_samples=1, mode="train", max_n_frames=None, prompt_tokens=None):
-        
         embed_fn = self.cp_transformer(video = video, 
-                                        motion = motion, 
-                                        face = face,
-                                       max_n_frames=max_n_frames,
-                                       mode=mode, skip=None)
+                                    motion = motion, 
+                                    face = face,
+                                    max_n_frames=max_n_frames,
+                                    mode=mode, skip=None)
+    
         out = self.peft_model(music, desc=desc, embed_fn=embed_fn,
-                              mode=mode, num_samples=num_samples, total_gen_len=max_n_frames,
-                              prompt_tokens=prompt_tokens)
+                            mode=mode, num_samples=num_samples, total_gen_len=max_n_frames,
+                            prompt_tokens=prompt_tokens)
         return out
 
-    def generate(self, piano_roll, desc, chords, drums,
-                 num_samples=1):
-        out = self.peft_model.generate(cp_fn=self.cp_transformer, piano_roll=piano_roll, desc=desc, chords=chords,
-                                       drums=drums, num_samples=num_samples)
-        return out
+        

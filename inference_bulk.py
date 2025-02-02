@@ -31,6 +31,17 @@ def interpolate(data, pad=False):
         data_new = np.concatenate([data_new, pad_frame], axis=0)
     return data_new
 
+
+def replicate_frames(data, factor=10):
+    """
+    Replicate each frame 'factor' times along the time axis.
+    E.g. a (50, dim) array -> (500, dim) array if factor=10.
+    """
+    data_new = np.repeat(data, repeats=factor, axis=0)
+    pad_frame = np.zeros((1, data_new.shape[1]), dtype=data_new.dtype)
+    data_new = np.concatenate([data_new, pad_frame], axis=0)
+    return data_new
+
 def read_lst(lst_path):
     with open(lst_path, "r") as f:
         lines = [x.strip() for x in f.readlines()]
@@ -55,20 +66,20 @@ def load_data(video_path=None, face_path=None, motion_path=None, offset=0):
 
     if video_path and os.path.isfile(video_path):
         video = torch.load(video_path).float().cpu().numpy()
-        video = interpolate(video, pad=True)
+        # video = replicate_frames(video)
         video_emb = torch.from_numpy(video).to(device).float()
 
     if face_path and os.path.isfile(face_path):
-        face = np.load(face_path)
-        face = interpolate(face, pad=True)
-        face_emb = torch.from_numpy(face).to(device).float()
+        face = torch.load(face_path)
+        # face = replicate_frames(face)
+        face_emb = face['face_p'].to(device).float()
 
     if motion_path and os.path.isfile(motion_path):
         motion = np.load(motion_path)
         # e.g. shape [T, 1, 34], so we take motion[:, 0, :]
         if motion.ndim == 3:
             motion = motion[:,0,:]
-        motion = interpolate(motion, pad=True)
+        # motion = replicate_frames(motion)
         motion_emb = torch.from_numpy(motion).to(device).float()
 
     print(f" Loaded shapes: video={video_emb.shape if video_emb is not None else None},"
@@ -132,6 +143,11 @@ def parse_args():
                         help="Folder containing subdirectories named chunk_XXX.")
     parser.add_argument("--offset", type=int, default=0, help="Offset for data loading if needed.")
 
+     # NEW: Booleans to enable or disable each modality
+    parser.add_argument("--is-video", action="store_true", help="If set, load video data")
+    parser.add_argument("--is-motion", action="store_true", help="If set, load motion data")
+    parser.add_argument("--is-face", action="store_true", help="If set, load face data")
+
     return parser.parse_args()
 
 # -----------------------------------------------------------------------------
@@ -147,9 +163,9 @@ def main():
     # Adjust these flags if needed: is_video, is_motion, is_face
     # If you truly want them dynamic, you can guess them from the presence of files,
     # or pass them as additional flags. For simplicity, let's turn them all on:
-    is_video = False
-    is_motion = False
-    is_face = True
+    is_video = args.is_video
+    is_motion = args.is_motion 
+    is_face = args.is_face
 
     print(f"[INFO] Loading model from: {args.model_path}")
     model = CoCoMulla(
@@ -182,25 +198,27 @@ def main():
 
     # Loop through subdirs
     for subdir in sorted(os.listdir(folder)):
+        print(subdir)
         # Only process subdirectories named "chunk_..."
-        if not subdir.startswith("chunk_"):
-            continue
+        # if not subdir.startswith("chunk_"):
+        #     continue
 
         chunk_dir = os.path.join(folder, subdir)
-        if not os.path.isdir(chunk_dir):
-            continue
+        # if not os.path.isdir(chunk_dir):
+        #     continue
 
-        print(f"========= Processing {chunk_dir} =========")
+        # print(f"========= Processing {chunk_dir} =========")
         # 4) Build paths to video, face, motion
         video_path, motion_path, face_path = None, None, None
         if is_video:
-            video_path = os.path.join(chunk_dir, "internvid.mp4.pt")
+            video_path = os.path.join(chunk_dir, "resnet.npy")
         if is_motion:
             motion_path = os.path.join(chunk_dir, "motion_kpts.npy")
             if not os.path.exists(motion_path):
                 continue
         if is_face:
-            face_path   = os.path.join(chunk_dir, "face.npy")
+            face_path   = chunk_dir ##os.path.join(chunk_dir, "face.npy")
+            print(face_path)
 
         # 5) Load data
         video_emb, face_emb, motion_emb = load_data(
@@ -210,8 +228,13 @@ def main():
             offset=args.offset
         )
 
+        
+
         # 6) Wrap batch
         batch = wrap_batch(video=video_emb, face=face_emb, motion=motion_emb, prompt=prompt_str)
+
+        print('batch')
+        print(batch)
 
         # 7) Generate
         pred = generate(model=model, batch=batch)

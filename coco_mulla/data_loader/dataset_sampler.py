@@ -35,23 +35,24 @@ def load_data_from_path(path, idx, sec):
         f_path = line.split(" ")[0]
         onset = float(line.split(" ")[1])
         offset = float(line.split(" ")[2])
-        video = torch.load(os.path.join(f_path, "internvid.mp4.pt")).to(torch.float32).detach().cpu().numpy()
+        video = torch.load(os.path.join(f_path, "resnet.npy")).to(torch.float32).detach().cpu().numpy()
+        print('video', video.shape)
         motion = np.load(os.path.join(f_path, "motion.npy"))[:, 0, :]
         face = np.load(os.path.join(f_path, "face.npy"))
 
 
-        # Replace spline interpolation with replication
-        video = replicate_frames(video, 10)   # shape (500, D_video)
-        motion = replicate_frames(motion, 10) # shape (500, D_motion)
-        face = replicate_frames(face, 10)     # shape (500, D_face)
+        # # Replace spline interpolation with replication
+        # video = replicate_frames(video, 10)   # shape (500, D_video)
+        # motion = replicate_frames(motion, 10) # shape (500, D_motion)
+        # face = replicate_frames(face, 10)     # shape (500, D_face)
 
 
         data.append({
             "path": f_path,
             "data": {
-                "video": interpolate(video),
-                "face":  interpolate(face),
-                "motion":interpolate(motion)
+                "video": video,
+                "face":  face,
+                "motion":motion
             }
         })
         onset = math.ceil(onset)
@@ -151,7 +152,7 @@ class Dataset(BaseDataset):
         ed = st + cfg.sample_sec
         frame_st = int(st * cfg.frame_res)
         frame_ed = int(ed * cfg.frame_res)
-
+        print('frame end', frame_ed)
         # Slice music frames
         music = music[:, frame_st: frame_ed]
 

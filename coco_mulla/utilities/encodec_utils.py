@@ -16,7 +16,7 @@ compression_model = load_compression_model("large", device=device, cache_dir=cac
 compression_model.eval()
 lm = load_lm_model("large", device=device, cache_dir=cache_dir)
 lm.eval()
-sample_rate = 32000
+sample_rate = 16000
 
 
 def extract_rvq(x, sr=32000):
