@@ -1,0 +1,7 @@
+{"time":"2024-12-02T19:52:57.965304769Z","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-12-02T19:52:57.965342659Z","level":"INFO","msg":"created symlink","path":"/home/coder/laopo/expotion/wandb/run-20241202_195257-wtdmh9k1/logs/debug-core.log"}
+{"time":"2024-12-02T19:52:58.087516815Z","level":"INFO","msg":"created new stream","id":"wtdmh9k1"}
+{"time":"2024-12-02T19:52:58.087564014Z","level":"INFO","msg":"stream: started","id":"wtdmh9k1"}
+{"time":"2024-12-02T19:52:58.087650102Z","level":"INFO","msg":"writer: Do: started","stream_id":"wtdmh9k1"}
+{"time":"2024-12-02T19:52:58.087669181Z","level":"INFO","msg":"sender: started","stream_id":"wtdmh9k1"}
+{"time":"2024-12-02T19:52:58.087827058Z","level":"INFO","msg":"handler: started","stream_id":"wtdmh9k1"}

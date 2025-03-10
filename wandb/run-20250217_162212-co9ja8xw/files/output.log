@@ -1,0 +1,28 @@
+Epoch 0:   0%|                                                                                 | 0/15 [00:02<?, ?it/s]
+/home/fathinah.izzati/TJ/filtered/tnj_1/rvq/CopyofCopyof051-SafetySecond_clip_037_360-370.npy
+motion torch.Size([500, 2, 499200])
+Traceback (most recent call last):
+  File "/l/users/fathinah.izzati/expotion_new/train.py", line 235, in <module>
+    main(args)
+  File "/l/users/fathinah.izzati/expotion_new/train.py", line 210, in main
+    train(
+  File "/l/users/fathinah.izzati/expotion_new/train.py", line 127, in train
+    for i, batch in enumerate(dl):
+  File "/home/fathinah.izzati/miniconda3/envs/cocomulla/lib/python3.11/site-packages/tqdm/std.py", line 1182, in __iter__
+    for obj in iterable:
+  File "/home/fathinah.izzati/miniconda3/envs/cocomulla/lib/python3.11/site-packages/torch/utils/data/dataloader.py", line 630, in __next__
+    data = self._next_data()
+           ^^^^^^^^^^^^^^^^^
+  File "/home/fathinah.izzati/miniconda3/envs/cocomulla/lib/python3.11/site-packages/torch/utils/data/dataloader.py", line 674, in _next_data
+    data = self._dataset_fetcher.fetch(index)  # may raise StopIteration
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/fathinah.izzati/miniconda3/envs/cocomulla/lib/python3.11/site-packages/torch/utils/data/_utils/fetch.py", line 51, in fetch
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/fathinah.izzati/miniconda3/envs/cocomulla/lib/python3.11/site-packages/torch/utils/data/_utils/fetch.py", line 51, in <listcomp>
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+            ~~~~~~~~~~~~^^^^^
+  File "/l/users/fathinah.izzati/expotion_new/coco_mulla/data_loader/dataset_sampler.py", line 207, in __getitem__
+    T,_,_,_ = face.shape ##change
+    ^^^^^^^
+ValueError: not enough values to unpack (expected 4, got 3)

@@ -1,0 +1,8 @@
+{"time":"2024-12-10T10:37:49.324069332Z","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-12-10T10:37:49.324101231Z","level":"INFO","msg":"created symlink","path":"/home/coder/laopo/expotion/wandb/run-20241210_103749-f8iggxd3/logs/debug-core.log"}
+{"time":"2024-12-10T10:37:49.449531303Z","level":"INFO","msg":"created new stream","id":"f8iggxd3"}
+{"time":"2024-12-10T10:37:49.449587592Z","level":"INFO","msg":"stream: started","id":"f8iggxd3"}
+{"time":"2024-12-10T10:37:49.44965674Z","level":"INFO","msg":"writer: Do: started","stream_id":"f8iggxd3"}
+{"time":"2024-12-10T10:37:49.44969174Z","level":"INFO","msg":"sender: started","stream_id":"f8iggxd3"}
+{"time":"2024-12-10T10:37:49.449736759Z","level":"INFO","msg":"handler: started","stream_id":"f8iggxd3"}
+{"time":"2024-12-10T10:37:50.170365269Z","level":"INFO","msg":"Starting system monitor"}

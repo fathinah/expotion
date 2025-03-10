@@ -1,0 +1,107 @@
+Epoch 0:  29%|████████████████████████▊                                                              | 10/35 [00:01<00:03,  6.45it/s]
+/l/users/fathinah.izzati/tnj_0x/rvq/CopyofCopyof013-TheZootCat_clip_006_50-60.npy
+motion torch.Size([500, 256])
+torch.Size([1, 251, 256]) torch.Size([1, 251, 1]) torch.Size([1, 251, 1]) torch.Size([1, 2, 251])
+/l/users/fathinah.izzati/tnj_0x/rvq/CopyofCopyof013-TheZootCat_clip_029_280-290.npy
+motion torch.Size([500, 256])
+torch.Size([1, 251, 256]) torch.Size([1, 251, 1]) torch.Size([1, 251, 1]) torch.Size([1, 2, 251])
+/l/users/fathinah.izzati/tnj_0x/rvq/CopyofCopyof013-TheZootCat_clip_027_260-270.npy
+motion torch.Size([500, 256])
+torch.Size([1, 251, 256]) torch.Size([1, 251, 1]) torch.Size([1, 251, 1]) torch.Size([1, 2, 251])
+/l/users/fathinah.izzati/tnj_0x/rvq/CopyofCopyof013-TheZootCat_clip_017_160-170.npy
+motion torch.Size([500, 256])
+torch.Size([1, 251, 256]) torch.Size([1, 251, 1]) torch.Size([1, 251, 1]) torch.Size([1, 2, 251])
+/l/users/fathinah.izzati/tnj_0x/rvq/CopyofCopyof013-TheZootCat_clip_037_360-370.npy
+motion torch.Size([500, 256])
+torch.Size([1, 251, 256]) torch.Size([1, 251, 1]) torch.Size([1, 251, 1]) torch.Size([1, 2, 251])
+/l/users/fathinah.izzati/tnj_0x/rvq/CopyofCopyof013-TheZootCat_clip_005_40-50.npy
+motion torch.Size([500, 256])
+torch.Size([1, 251, 256]) torch.Size([1, 251, 1]) torch.Size([1, 251, 1]) torch.Size([1, 2, 251])
+/l/users/fathinah.izzati/tnj_0x/rvq/CopyofCopyof013-TheZootCat_clip_008_70-80.npy
+motion torch.Size([500, 256])
+torch.Size([1, 251, 256]) torch.Size([1, 251, 1]) torch.Size([1, 251, 1]) torch.Size([1, 2, 251])
+/l/users/fathinah.izzati/tnj_0x/rvq/CopyofCopyof013-TheZootCat_clip_021_200-210.npy
+motion torch.Size([500, 256])
+torch.Size([1, 251, 256]) torch.Size([1, 251, 1]) torch.Size([1, 251, 1]) torch.Size([1, 2, 251])
+/l/users/fathinah.izzati/tnj_0x/rvq/CopyofCopyof013-TheZootCat_clip_042_410-420.npy
+motion torch.Size([500, 256])
+torch.Size([1, 251, 256]) torch.Size([1, 251, 1]) torch.Size([1, 251, 1]) torch.Size([1, 2, 251])
+/l/users/fathinah.izzati/tnj_0x/rvq/CopyofCopyof013-TheZootCat_clip_011_100-110.npy
+motion torch.Size([500, 256])
+torch.Size([1, 251, 256]) torch.Size([1, 251, 1]) torch.Size([1, 251, 1]) torch.Size([1, 2, 251])
+/l/users/fathinah.izzati/tnj_0x/rvq/CopyofCopyof013-TheZootCat_clip_038_370-380.npy
+motion torch.Size([500, 256])
+torch.Size([1, 251, 256]) torch.Size([1, 251, 1]) torch.Size([1, 251, 1]) torch.Size([1, 2, 251])
+/l/users/fathinah.izzati/tnj_0x/rvq/CopyofCopyof013-TheZootCat_clip_041_400-410.npy
+motion torch.Size([500, 256])
+torch.Size([1, 251, 256]) torch.Size([1, 251, 1]) torch.Size([1, 251, 1]) torch.Size([1, 2, 251])
+/l/users/fathinah.izzati/tnj_0x/rvq/CopyofCopyof013-TheZootCat_clip_012_110-120.npy
+motion torch.Size([500, 256])
+torch.Size([1, 251, 256]) torch.Size([1, 251, 1]) torch.Size([1, 251, 1]) torch.Size([1, 2, 251])
+/l/users/fathinah.izzati/tnj_0x/rvq/CopyofCopyof013-TheZootCat_clip_001_0-10.npy
+motion torch.Size([500, 256])
+torch.Size([1, 251, 256]) torch.Size([1, 251, 1]) torch.Size([1, 251, 1]) torch.Size([1, 2, 251])
+/l/users/fathinah.izzati/tnj_0x/rvq/CopyofCopyof013-TheZootCat_clip_016_150-160.npy
+motion torch.Size([500, 256])
+torch.Size([1, 251, 256]) torch.Size([1, 251, 1]) torch.Size([1, 251, 1]) torch.Size([1, 2, 251])
+/l/users/fathinah.izzati/tnj_0x/rvq/CopyofCopyof013-TheZootCat_clip_009_80-90.npy
+motion torch.Size([500, 256])
+torch.Size([1, 251, 256]) torch.Size([1, 251, 1]) torch.Size([1, 251, 1]) torch.Size([1, 2, 251])
+/l/users/fathinah.izzati/tnj_0x/rvq/CopyofCopyof013-TheZootCat_clip_004_30-40.npy
+motion torch.Size([500, 256])
+torch.Size([1, 251, 256]) torch.Size([1, 251, 1]) torch.Size([1, 251, 1]) torch.Size([1, 2, 251])
+/l/users/fathinah.izzati/tnj_0x/rvq/CopyofCopyof013-TheZootCat_clip_007_60-70.npy
+motion torch.Size([500, 256])
+torch.Size([1, 251, 256]) torch.Size([1, 251, 1]) torch.Size([1, 251, 1]) torch.Size([1, 2, 251])
+/l/users/fathinah.izzati/tnj_0x/rvq/CopyofCopyof013-TheZootCat_clip_036_350-360.npy
+motion torch.Size([500, 256])
+torch.Size([1, 251, 256]) torch.Size([1, 251, 1]) torch.Size([1, 251, 1]) torch.Size([1, 2, 251])
+/l/users/fathinah.izzati/tnj_0x/rvq/CopyofCopyof013-TheZootCat_clip_020_190-200.npy
+motion torch.Size([500, 256])
+torch.Size([1, 251, 256]) torch.Size([1, 251, 1]) torch.Size([1, 251, 1]) torch.Size([1, 2, 251])
+/l/users/fathinah.izzati/tnj_0x/rvq/CopyofCopyof013-TheZootCat_clip_015_140-150.npy
+motion torch.Size([500, 256])
+torch.Size([1, 251, 256]) torch.Size([1, 251, 1]) torch.Size([1, 251, 1]) torch.Size([1, 2, 251])
+/l/users/fathinah.izzati/tnj_0x/rvq/CopyofCopyof013-TheZootCat_clip_024_230-240.npy
+motion torch.Size([500, 256])
+torch.Size([1, 251, 256]) torch.Size([1, 251, 1]) torch.Size([1, 251, 1]) torch.Size([1, 2, 251])
+/l/users/fathinah.izzati/tnj_0x/rvq/CopyofCopyof013-TheZootCat_clip_032_310-320.npy
+motion torch.Size([500, 256])
+torch.Size([1, 251, 256]) torch.Size([1, 251, 1]) torch.Size([1, 251, 1]) torch.Size([1, 2, 251])
+/l/users/fathinah.izzati/tnj_0x/rvq/CopyofCopyof013-TheZootCat_clip_035_340-350.npy
+motion torch.Size([500, 256])
+torch.Size([1, 251, 256]) torch.Size([1, 251, 1]) torch.Size([1, 251, 1]) torch.Size([1, 2, 251])
+/l/users/fathinah.izzati/tnj_0x/rvq/CopyofCopyof013-TheZootCat_clip_023_220-230.npy
+motion torch.Size([500, 256])
+torch.Size([1, 251, 256]) torch.Size([1, 251, 1]) torch.Size([1, 251, 1]) torch.Size([1, 2, 251])
+/l/users/fathinah.izzati/tnj_0x/rvq/CopyofCopyof013-TheZootCat_clip_034_330-340.npy
+motion torch.Size([500, 256])
+torch.Size([1, 251, 256]) torch.Size([1, 251, 1]) torch.Size([1, 251, 1]) torch.Size([1, 2, 251])
+/l/users/fathinah.izzati/tnj_0x/rvq/CopyofCopyof013-TheZootCat_clip_030_290-300.npy
+motion torch.Size([500, 256])
+torch.Size([1, 251, 256]) torch.Size([1, 251, 1]) torch.Size([1, 251, 1]) torch.Size([1, 2, 251])
+/l/users/fathinah.izzati/tnj_0x/rvq/CopyofCopyof013-TheZootCat_clip_018_170-180.npy
+motion torch.Size([500, 256])
+torch.Size([1, 251, 256]) torch.Size([1, 251, 1]) torch.Size([1, 251, 1]) torch.Size([1, 2, 251])
+/l/users/fathinah.izzati/tnj_0x/rvq/CopyofCopyof013-TheZootCat_clip_031_300-310.npy
+motion torch.Size([500, 256])
+torch.Size([1, 251, 256]) torch.Size([1, 251, 1]) torch.Size([1, 251, 1]) torch.Size([1, 2, 251])
+/l/users/fathinah.izzati/tnj_0x/rvq/CopyofCopyof013-TheZootCat_clip_002_10-20.npy
+motion torch.Size([500, 256])
+torch.Size([1, 251, 256]) torch.Size([1, 251, 1]) torch.Size([1, 251, 1]) torch.Size([1, 2, 251])
+/l/users/fathinah.izzati/tnj_0x/rvq/CopyofCopyof013-TheZootCat_clip_022_210-220.npy
+motion torch.Size([500, 256])
+torch.Size([1, 251, 256]) torch.Size([1, 251, 1]) torch.Size([1, 251, 1]) torch.Size([1, 2, 251])
+/l/users/fathinah.izzati/tnj_0x/rvq/CopyofCopyof013-TheZootCat_clip_040_390-400.npy
+motion torch.Size([500, 256])
+torch.Size([1, 251, 256]) torch.Size([1, 251, 1]) torch.Size([1, 251, 1]) torch.Size([1, 2, 251])
+/l/users/fathinah.izzati/tnj_0x/rvq/CopyofCopyof013-TheZootCat_clip_026_250-260.npy
+motion torch.Size([500, 256])
+torch.Size([1, 251, 256]) torch.Size([1, 251, 1]) torch.Size([1, 251, 1]) torch.Size([1, 2, 251])
+/l/users/fathinah.izzati/tnj_0x/rvq/CopyofCopyof013-TheZootCat_clip_025_240-250.npy
+motion torch.Size([500, 256])
+torch.Size([1, 251, 256]) torch.Size([1, 251, 1]) torch.Size([1, 251, 1]) torch.Size([1, 2, 251])
+/l/users/fathinah.izzati/tnj_0x/rvq/CopyofCopyof013-TheZootCat_clip_033_320-330.npy
+motion torch.Size([500, 256])
+torch.Size([1, 251, 256]) torch.Size([1, 251, 1]) torch.Size([1, 251, 1]) torch.Size([1, 2, 251])
+Saved 0 missing files to missing_files.txt

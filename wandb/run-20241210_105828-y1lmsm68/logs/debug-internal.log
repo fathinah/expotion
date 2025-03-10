@@ -1,0 +1,11 @@
+{"time":"2024-12-10T10:58:28.301632134Z","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-12-10T10:58:28.301667244Z","level":"INFO","msg":"created symlink","path":"/home/coder/laopo/expotion/wandb/run-20241210_105828-y1lmsm68/logs/debug-core.log"}
+{"time":"2024-12-10T10:58:28.424004992Z","level":"INFO","msg":"created new stream","id":"y1lmsm68"}
+{"time":"2024-12-10T10:58:28.424073971Z","level":"INFO","msg":"stream: started","id":"y1lmsm68"}
+{"time":"2024-12-10T10:58:28.424151391Z","level":"INFO","msg":"writer: Do: started","stream_id":"y1lmsm68"}
+{"time":"2024-12-10T10:58:28.424518618Z","level":"INFO","msg":"sender: started","stream_id":"y1lmsm68"}
+{"time":"2024-12-10T10:58:28.424562458Z","level":"INFO","msg":"handler: started","stream_id":"y1lmsm68"}
+{"time":"2024-12-10T10:58:31.478409222Z","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-12-10T11:02:52.696875508Z","level":"INFO","msg":"stream: closing","id":"y1lmsm68"}
+{"time":"2024-12-10T11:02:52.697040117Z","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-12-10T11:02:52.698074316Z","level":"INFO","msg":"Stopped system monitor"}

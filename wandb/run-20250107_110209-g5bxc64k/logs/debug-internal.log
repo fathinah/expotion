@@ -1,0 +1,11 @@
+{"time":"2025-01-07T11:02:09.487192047Z","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2025-01-07T11:02:09.487232796Z","level":"INFO","msg":"created symlink","path":"/home/coder/laopo/expotion/wandb/run-20250107_110209-g5bxc64k/logs/debug-core.log"}
+{"time":"2025-01-07T11:02:09.606447214Z","level":"INFO","msg":"created new stream","id":"g5bxc64k"}
+{"time":"2025-01-07T11:02:09.606743498Z","level":"INFO","msg":"stream: started","id":"g5bxc64k"}
+{"time":"2025-01-07T11:02:09.606786317Z","level":"INFO","msg":"writer: Do: started","stream_id":"g5bxc64k"}
+{"time":"2025-01-07T11:02:09.60718946Z","level":"INFO","msg":"handler: started","stream_id":"g5bxc64k"}
+{"time":"2025-01-07T11:02:09.607256289Z","level":"INFO","msg":"sender: started","stream_id":"g5bxc64k"}
+{"time":"2025-01-07T11:02:09.979867895Z","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-01-07T11:02:30.302785852Z","level":"INFO","msg":"stream: closing","id":"g5bxc64k"}
+{"time":"2025-01-07T11:02:30.303060407Z","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-01-07T11:02:30.305157861Z","level":"INFO","msg":"Stopped system monitor"}

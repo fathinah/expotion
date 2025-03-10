@@ -1,0 +1,11 @@
+{"time":"2024-12-10T11:14:37.090045126Z","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-12-10T11:14:37.090079546Z","level":"INFO","msg":"created symlink","path":"/home/coder/laopo/expotion/wandb/run-20241210_111437-dn4v1sz0/logs/debug-core.log"}
+{"time":"2024-12-10T11:14:37.212031847Z","level":"INFO","msg":"created new stream","id":"dn4v1sz0"}
+{"time":"2024-12-10T11:14:37.212093736Z","level":"INFO","msg":"stream: started","id":"dn4v1sz0"}
+{"time":"2024-12-10T11:14:37.212170625Z","level":"INFO","msg":"writer: Do: started","stream_id":"dn4v1sz0"}
+{"time":"2024-12-10T11:14:37.212207845Z","level":"INFO","msg":"sender: started","stream_id":"dn4v1sz0"}
+{"time":"2024-12-10T11:14:37.212282633Z","level":"INFO","msg":"handler: started","stream_id":"dn4v1sz0"}
+{"time":"2024-12-10T11:14:37.841263879Z","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-12-10T11:16:18.786999784Z","level":"INFO","msg":"stream: closing","id":"dn4v1sz0"}
+{"time":"2024-12-10T11:16:18.787201611Z","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-12-10T11:16:18.788211426Z","level":"INFO","msg":"Stopped system monitor"}

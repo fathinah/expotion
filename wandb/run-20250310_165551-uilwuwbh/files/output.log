@@ -1,0 +1,31 @@
+Epoch 0:   0%|                                                                                                | 0/35 [00:00<?, ?it/s]
+/l/users/fathinah.izzati/tnj_0x/rvq/CopyofCopyof013-TheZootCat_clip_006_50-60.npy
+motion torch.Size([500, 256])
+torch.Size([1, 251, 256]) torch.Size([1, 251, 1]) torch.Size([1, 251, 1]) torch.Size([1, 2, 251])
+Traceback (most recent call last):
+  File "/l/users/fathinah.izzati/expotion_new/train.py", line 235, in <module>
+    main(args)
+  File "/l/users/fathinah.izzati/expotion_new/train.py", line 210, in main
+    train(
+  File "/l/users/fathinah.izzati/expotion_new/train.py", line 149, in train
+    outputs = model(**batch_1)
+              ^^^^^^^^^^^^^^^^
+  File "/home/fathinah.izzati/miniconda3/envs/cocomulla/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/fathinah.izzati/miniconda3/envs/cocomulla/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/l/users/fathinah.izzati/expotion_new/coco_mulla/models/model.py", line 311, in forward
+    embed_fn = self.cp_transformer(face=face,
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/fathinah.izzati/miniconda3/envs/cocomulla/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/fathinah.izzati/miniconda3/envs/cocomulla/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/l/users/fathinah.izzati/expotion_new/coco_mulla/models/model.py", line 255, in forward
+    cond_t = torch.where(cond_mask > 0, cond, mask_embedding_per_layer)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: The size of tensor a (14) must match the size of tensor b (50) at non-singleton dimension 2
