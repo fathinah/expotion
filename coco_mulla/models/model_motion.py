@@ -19,7 +19,7 @@ class CondMusicgen(nn.Module):
         self.musicgen = mg
         self.lm = mg.lm
         self.max_duration = sec
-        self.frame_rate = 50
+        self.frame_rate = 20
 
     def set_training(self):
         self.lm.train()
@@ -155,7 +155,6 @@ class CPTransformerLayer(nn.Module):
     def forward(self, x, cond):
         with self.autocast:
             nx = self.norm1(x) + cond
-            print('nx', nx.shape)
             q, k, v, o = self.self_attn(nx, nx, nx, emb_fn=None,
                                         attn_mask=None,
                                         key_padding_mask=None,
@@ -182,7 +181,7 @@ class CPTransformer(nn.Module):
         cond_dim = latent_dim # 3 conditions
         # cond_dim = latent_dim
         num_layers = len(model.layers) - start_layer
-        max_n_frames = 500
+        max_n_frames = 400
 
         # self.masked_embedding = nn.Parameter(
         #     torch.randn(num_layers, max_n_frames + 1, cond_dim - 520),
@@ -241,20 +240,13 @@ class CPTransformer(nn.Module):
         max_n_frames = self.max_n_frames if max_n_frames is None else max_n_frames
         B, T, C= face.shape
         o = self.pos_emb[0][None, :T].repeat(B, 1, 1)
-        print('o.shape', o.shape)
         outs = []
 
         face = self.ld_proj(face) 
 
         for i in range(len(self.layers)):
             cond = face
-            print('cond shape',cond.shape)
-            print('merge linear',self.merge_linear[i](cond).shape)
-            print('self.pos_emb[i + 1]',  self.pos_emb[i + 1].shape)
-            print('self.pos_emb[i + 1][None, :T]',self.pos_emb[i + 1][None, :T].shape)
-            print('self.pos_emb[i + 1][None, :T].repeat(B, 1, 1,1)',self.pos_emb[i + 1][None, :T].repeat(B, 1, 1, 1).shape)
             embedding = self.merge_linear[i](cond) + self.pos_emb[i + 1][None, :T].repeat(B, 1, 1) 
-            print('embedding shape',embedding.shape)
             q, k, v, o = self.layers[i](o, embedding)
             if not mode == "train":
                 outs.append([[torch.cat([q, q], 0),

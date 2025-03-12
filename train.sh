@@ -1,7 +1,7 @@
 #!/bin/bash
 
 python3 train.py \
-    -d exp_0217/ \
+    -d exp_0311/ \
     -n face_must_b20_e20_lr1e-02 \
     -l 48 \
     -r 48 \

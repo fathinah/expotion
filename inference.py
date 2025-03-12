@@ -2,7 +2,7 @@ import argparse
 import librosa
 import shutil
 # from marlin_pytorch import Marlin
-from coco_mulla.models import CoCoMulla
+from coco_mulla.models.model_motion import CoCoMulla
 from coco_mulla.utilities import *
 from coco_mulla.utilities.encodec_utils import extract_rvq, save_rvq
 from coco_mulla.utilities.symbolic_utils import process_midi, process_chord
@@ -16,25 +16,12 @@ import shlex
 import soundfile as sf
 import torch.nn.functional as F
 
-def video_interpolate(x):
-    x = x.mean(dim=(-1, -2))  
-    x_interpolated = F.interpolate(x, size=500, mode='linear', align_corners=False)
-    x_interpolated = x_interpolated.transpose(1, 2).squeeze(0) 
-    pad_frame = np.ones((1, x_interpolated.shape[1]))
-    x_interpolated = np.concatenate([x_interpolated, pad_frame], axis=0)
-    return x_interpolated
-
 def motion_interpolate(v):
-    # Reshape to [1, 256, 50] to treat it as a 1D sequence with 256 channels
-    v = v.unsqueeze(0).permute(0, 2, 1)  # Shape: [1, 50, 256] → [1, 256, 50]
-
-    # Interpolate along the time dimension
-    v_interpolated = F.interpolate(v, size=500, mode='linear', align_corners=True)  # Shape: [1, 256, 500]
-
-    # Reshape back to [500, 256]
+    v = v.unsqueeze(0).permute(0, 2, 1) 
+    v_interpolated = F.interpolate(v, size=400, mode='linear', align_corners=True)  # Shape: [1, 256, 500]
     v_interpolated = v_interpolated.permute(0, 2, 1).squeeze(0)  # Shape: [500, 256]
     return v_interpolated
-# Marlin.clean_cache()
+
 DEVICE = get_device()
 device = get_device()
 def resample(input, output, rate=5*16):
@@ -82,7 +69,7 @@ def load_data(feat_path, output_folder, offset):
     # face_p = F.interpolate(face_p, size=new_T, mode='linear', align_corners=True)
     # face_p = face_p.squeeze(0).permute(1, 0)
     # face_p = face_p.cpu().numpy()
-    face_p = motion_interpolate(torch.load(feat_path)) ##change
+    face_p = motion_interpolate(torch.load(feat_path)).detach().numpy() ##change
     # face_p = torch.load(feat_path)['face_p'].cpu().numpy() ##chnage
 
 
@@ -93,15 +80,13 @@ def load_data(feat_path, output_folder, offset):
     body = np.zeros((new_T,1))
     print('vid, body, face', vid.shape, body.shape, face_p.shape)
 
-    
-    
     face = crop(face_p[None, ...], sample_sec, res,offset=offset)
     body = crop(body[None, ...], sample_sec, res, offset=offset)
     vid = crop(vid[None, ...],sample_sec, res, offset=offset)
     print("face",face.shape)
     print("vid",vid.shape)
     print("body",body.shape)
-    face = face.to(device).float() ##change
+    face = torch.from_numpy(face).to(device).float()
     body = torch.from_numpy(body).to(device).float()
     vid = torch.from_numpy(vid).to(device).float()
     return face, body, vid
@@ -141,13 +126,12 @@ def replace_audio_in_video(video_path, audio_path, output_path):
     video_with_new_audio.write_videofile(output_path, codec="libx264", audio_codec="aac")
 
 def save_pred(feat_path, output_folder, wav, tags, pred):
-    feat_type = feat_path.split('/')[-2]
     video_path = feat_path.replace("raft","video").replace(".pt",".mp4") ##change
     video_name = video_path[:-4].split('/')[-1]
     mkdir(output_folder)
     output_folder = output_folder+'/'+video_name
     mkdir(output_folder) ## change
-    shutil.copy(video_path, output_folder)
+    # shutil.copy(video_path, output_folder)
 
     for i in [0,3]: ## change
     # rvq_p = os.path.join(output_folder, "rvq/rvq.npy")
@@ -155,7 +139,7 @@ def save_pred(feat_path, output_folder, wav, tags, pred):
         audio_p = os.path.join(output_folder, f'{tags[i]}.wav')
         wav_ = wav[i].squeeze().cpu()
         sf.write(audio_p, wav_, 16000)
-        replace_audio_in_video(video_path, audio_p,output_folder+f"/{video_name}_{feat_type}_{tags[i]}.mp4")
+        # replace_audio_in_video(video_path, audio_p,output_folder+f"/{video_name}_{feat_type}_{tags[i]}.mp4")
 
 
 def wrap_batch(face, body, vid, cond_mask, prompt):

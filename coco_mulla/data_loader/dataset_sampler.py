@@ -32,7 +32,7 @@ def motion_interpolate(v):
     v = v.unsqueeze(0).permute(0, 2, 1)  # Shape: [1, 50, 256] → [1, 256, 50]
 
     # Interpolate along the time dimension
-    v_interpolated = F.interpolate(v, size=500, mode='linear', align_corners=True)  # Shape: [1, 256, 500]
+    v_interpolated = F.interpolate(v, size=400, mode='linear', align_corners=True)  # Shape: [1, 256, 500]
 
     # Reshape back to [500, 256]
     v_interpolated = v_interpolated.permute(0, 2, 1).squeeze(0)  # Shape: [500, 256]
@@ -109,21 +109,20 @@ class Dataset(BaseDataset):
         tmp = 0
         while True:
             feature_id = idx if tmp==0 else random.sample(self.data,1)[0]##change 
-            mix_id = os.path.join(os.path.dirname(feature_id).replace("raft","rvq"),os.path.basename(feature_id)).replace(".pt",".npy").strip() ##change
+            feats = feature_id.split(' ')
+            mix_id = feats[-1]
+            feature_id = feats[0]
+            # mix_id = os.path.join(os.path.dirname(feature_id).replace("raft","rvq"),os.path.basename(feature_id)).replace(".pt",".npy").strip() ##change
             # feature_id = os.path.join(os.path.dirname(feature_id).replace("video","face"),os.path.basename(feature_id)).replace(".mp4",".pth").strip() ##change
             if os.path.exists(mix_id) and os.path.exists(feature_id):
                 break
             else:
                 self.not_found.add(feature_id)
-                print(f"err in reading file {mix_id},{feature_id}")
-                print(len(self.not_found))
                 tmp=1
-        print(mix_id)
         mix = np.load(mix_id)
         # resnet = video_interpolate(torch.load(feature_id))  #change
         # face = torch.load(feature_id)['face_p'] 
         motion = motion_interpolate(torch.load(feature_id))
-        print('motion', motion.shape)
         # print('motion size', motion.shape)
         # video = torch.load(vid_id)
 
