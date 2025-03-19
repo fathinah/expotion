@@ -1,7 +1,0 @@
-{"time":"2024-12-02T19:56:59.678334772Z","level":"INFO","msg":"using version","core version":"0.18.7"}
-{"time":"2024-12-02T19:56:59.678364942Z","level":"INFO","msg":"created symlink","path":"/home/coder/laopo/expotion/wandb/run-20241202_195659-wlencya7/logs/debug-core.log"}
-{"time":"2024-12-02T19:56:59.799479574Z","level":"INFO","msg":"created new stream","id":"wlencya7"}
-{"time":"2024-12-02T19:56:59.799545172Z","level":"INFO","msg":"stream: started","id":"wlencya7"}
-{"time":"2024-12-02T19:56:59.799589392Z","level":"INFO","msg":"writer: Do: started","stream_id":"wlencya7"}
-{"time":"2024-12-02T19:56:59.799612561Z","level":"INFO","msg":"handler: started","stream_id":"wlencya7"}
-{"time":"2024-12-02T19:56:59.799707139Z","level":"INFO","msg":"sender: started","stream_id":"wlencya7"}

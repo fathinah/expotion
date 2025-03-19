@@ -4,6 +4,8 @@ from ..utilities import *
 import numpy as np
 import random
 import torch.nn.functional as F
+import json
+import ast
 
 def video_interpolate(x):
     x = x.mean(dim=(-1, -2))  
@@ -13,29 +15,10 @@ def video_interpolate(x):
     x_interpolated = np.concatenate([x_interpolated, pad_frame], axis=0)
     return x_interpolated
 
-def motion_interpolate2(x):
-    x = x.unsqueeze(0).transpose(1, 2)  # Now x.shape is [1, 2, 50, 520, 960]
-
-    # Interpolate the time dimension from 50 to 500; spatial dimensions remain the same.
-    x_interp = F.interpolate(x, size=(500, 520, 960), mode='trilinear', align_corners=False)
-
-    # Restore original order: remove batch dimension and transpose back to get [500, 2, 520, 960]
-    x_interp = x_interp.transpose(1, 2).squeeze(0)
-    
-    # Flatten the spatial dimensions (520 and 960) into one dimension: [500, 2, 520*960]
-    x_interp = x_interp.flatten(2)  # Alternatively: x_interp = x_interp.view(x_interp.shape[0], x_interp.shape[1], -1)
-    
-    return x_interp
-
 def motion_interpolate(v):
-    # Reshape to [1, 256, 50] to treat it as a 1D sequence with 256 channels
-    v = v.unsqueeze(0).permute(0, 2, 1)  # Shape: [1, 50, 256] → [1, 256, 50]
-
-    # Interpolate along the time dimension
-    v_interpolated = F.interpolate(v, size=500, mode='linear', align_corners=True)  # Shape: [1, 256, 500]
-
-    # Reshape back to [500, 256]
-    v_interpolated = v_interpolated.permute(0, 2, 1).squeeze(0)  # Shape: [500, 256]
+    v = v.unsqueeze(0).permute(0, 2, 1)
+    v_interpolated = F.interpolate(v, size=500, mode='linear', align_corners=True) 
+    v_interpolated = v_interpolated.permute(0, 2, 1).squeeze(0) 
     return v_interpolated
 
 
@@ -47,29 +30,10 @@ def load_data_from_path(path):
     for line in lines:
         lst.append(line.rstrip('\n'))
     return lst
-    # data = []
-    # data_index = []
-    # for i, line in enumerate(lines):
-    #     line = line.rstrip()
-    #     f_path = line.split(" ")[0]
-    #     onset = float(line.split(" ")[1])
-    #     offset = float(line.split(" ")[2])
-    #     data += [{"path": f_path,
-    #               "data": {
-    #                   "piano_roll":
-    #                       np.load(os.path.join(f_path, "midi.npy"))
-    #               }}]
-    #     x_len = data[i]["data"]["piano_roll"].shape[0] / 50
-    #     if offset == -1 or x_len < offset:
-    #         offset = x_len
-    #     onset = math.ceil(onset)
-    #     offset = int(offset)
-    #     data_index += [[idx, i, j] for j in range(onset, offset - sec, 10)]
-    # return data, data_index
 
 
 class Dataset(BaseDataset):
-    def __init__(self, path_lst, cfg, rid, sampling_prob=None, sampling_strategy=None, inference=False):
+    def __init__(self, path_lst, cfg, rid, prompt_file, sampling_prob=None, sampling_strategy=None, inference=False):
         super(Dataset, self).__init__()
         self.rid = rid
         self.rng = np.random.RandomState(42 + rid * 100)
@@ -88,12 +52,13 @@ class Dataset(BaseDataset):
         self.f_offset = 0
         self.inference = inference
 
-        self.descs = [
-            "catchy song",
-            "melodic music piece",
-            "a song",
-            "music tracks",
-        ]
+        self.descs = []
+        with open(prompt_file, "r") as f:
+            lines = f.readlines()
+        for line in lines:
+            self.descs.append(line.rstrip('\n'))
+        print('desc',self.descs)   
+        
         self.sampling_strategy = sampling_strategy
         if sampling_prob is None:
             sampling_prob = [0., 0.8]
@@ -109,28 +74,30 @@ class Dataset(BaseDataset):
         tmp = 0
         while True:
             feature_id = idx if tmp==0 else random.sample(self.data,1)[0]##change 
-            mix_id = os.path.join(os.path.dirname(feature_id).replace("raft","rvq"),os.path.basename(feature_id)).replace(".pt",".npy").strip() ##change
+            feats = feature_id.split('|')
+            mix_id = feats[-2]
+            feature_id = feats[0]
+            caption = feats[-1]
+            caption = ast.literal_eval(caption)
+            caption = caption["caption"].replace("<s>","").replace("</s>","").replace("\n","").strip()
+            # mix_id = os.path.join(os.path.dirname(feature_id).replace("raft","rvq"),os.path.basename(feature_id)).replace(".pt",".npy").strip() ##change
             # feature_id = os.path.join(os.path.dirname(feature_id).replace("video","face"),os.path.basename(feature_id)).replace(".mp4",".pth").strip() ##change
             if os.path.exists(mix_id) and os.path.exists(feature_id):
                 break
             else:
                 self.not_found.add(feature_id)
-                print(f"err in reading file {mix_id},{feature_id}")
-                print(len(self.not_found))
                 tmp=1
-        print(mix_id)
         mix = np.load(mix_id)
         # resnet = video_interpolate(torch.load(feature_id))  #change
         # face = torch.load(feature_id)['face_p'] 
         motion = motion_interpolate(torch.load(feature_id))
-        print('motion', motion.shape)
-        # print('motion size', motion.shape)
         # video = torch.load(vid_id)
 
         motion = motion.cpu().detach().numpy() 
         result = {
             "mix": mix,
-            "face": motion  ##change
+            "face": motion, ##change,
+            "caption": caption
         }
         return result
 
@@ -176,6 +143,7 @@ class Dataset(BaseDataset):
         data = self.load_data(vid_id)
         mix = data["mix"]
         face = data["face"]
+        caption = data["caption"]
         
 
         cfg = self.cfg
@@ -207,14 +175,13 @@ class Dataset(BaseDataset):
         T,_ = face.shape ##change
         seg_len = frame_ed - frame_st + 1
         cond_mask = self.sample_mask(seg_len)
-        desc = self.get_prompt()
         return {
             "mix": mix,
             "face":face,
             "vid": np.zeros((T,1)),
             "body": np.zeros((T,1)),
             "cond_mask":cond_mask,
-            "desc": desc
+            "desc": caption
         }
 
     def reset_random_seed(self, r, e):

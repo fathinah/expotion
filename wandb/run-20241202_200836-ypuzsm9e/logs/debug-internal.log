@@ -1,8 +1,0 @@
-{"time":"2024-12-02T20:08:36.661045359Z","level":"INFO","msg":"using version","core version":"0.18.7"}
-{"time":"2024-12-02T20:08:36.661079699Z","level":"INFO","msg":"created symlink","path":"/home/coder/laopo/expotion/wandb/run-20241202_200836-ypuzsm9e/logs/debug-core.log"}
-{"time":"2024-12-02T20:08:36.78451823Z","level":"INFO","msg":"created new stream","id":"ypuzsm9e"}
-{"time":"2024-12-02T20:08:36.784603731Z","level":"INFO","msg":"stream: started","id":"ypuzsm9e"}
-{"time":"2024-12-02T20:08:36.784686311Z","level":"INFO","msg":"writer: Do: started","stream_id":"ypuzsm9e"}
-{"time":"2024-12-02T20:08:36.784746371Z","level":"INFO","msg":"handler: started","stream_id":"ypuzsm9e"}
-{"time":"2024-12-02T20:08:36.78469816Z","level":"INFO","msg":"sender: started","stream_id":"ypuzsm9e"}
-{"time":"2024-12-02T20:08:37.445525037Z","level":"INFO","msg":"Starting system monitor"}

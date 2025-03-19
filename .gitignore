@@ -1,4 +1,22 @@
 preprocess/.marlin
 preprocess/openpose
-exp_0114
-exp
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore experiment folders
+exp_*/*
+exp_*/
+
+# Ignore wandb logs
+wandb/
+wandb-*
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore Jupyter notebook checkpoints (if applicable)
+.ipynb_checkpoints/
+
