@@ -1,20 +1,32 @@
+# EXPOTION: FACIAL EXPRESSION AND MOTION CONTROL FOR MULTIMODAL MUSIC GENERATION
 
-## Quick Start
+A multimodal music generation project using video and audio inputs.
 
-### Requirements
-The project requires Python 3.11. See `requirements.txt`.
+## Demo Page
 
-    pip install -r requirements.txt
+🔗 [View the live demo](https://github.com/fathinah/expotion)
 
-### Inference
+## Dataset
 
-python inference.py --num_layers=48 --latent_dim=12 \
-                        --output_folder=your_output_folder \
-                        --model_path=your_model_weight_path \
-                        --audio_path=your_audio_path \
-                        --midi_path=your_midi_path \
-                        --chord_path=your_chord_path \
-                        --prompt_path=your_prompt_path \
-                        --onset=your_onset  
-See `demo` folder for the input data format. `Onset` should be a number indicating the starting second of the input audio.
+We use the [Human Music Moves dataset (video & audio)](https://huggingface.co/datasets/mbzmusic/human-music-moves).
 
+## Features
+
+1. **SynchFormer**  
+   Precomputed control signals at 5 fps:  
+   https://huggingface.co/datasets/mbzmusic/synchformer_5fps/tree/main
+
+2. **RAFT**  
+   Optical‐flow features at 5 fps:  
+   https://huggingface.co/datasets/mbzmusic/output_raft_nocap_5fps_v1
+
+## Requirements
+
+- Python **3.11**  
+- See [requirements.txt](requirements.txt)
+
+## Installation
+
+```bash
+# Create & activate your Python 3.11 environment, then:
+pip install -r requirements.txt
