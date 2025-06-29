@@ -1,6 +1,6 @@
 # EXPOTION: FACIAL EXPRESSION AND MOTION CONTROL FOR MULTIMODAL MUSIC GENERATION
 
-A multimodal music generation project using video and audio inputs.
+A generative model leveraging multimodal visual controls—specifically, human facial expressions and upper-body motion—as well as text prompts to produce expressive and temporally accurate music.
 
 ## Demo Page
 
