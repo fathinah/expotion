@@ -4,7 +4,7 @@ A generative model leveraging multimodal visual controls—specifically, human f
 
 ## Demo Page
 
-🔗 [View the live demo](https://github.com/fathinah/expotion)
+🔗 [View the live demo](https://expotion2025.github.io/expotion)
 
 ## Dataset
 
